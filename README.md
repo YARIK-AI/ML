@@ -8,6 +8,8 @@
 
 Все необходимые скачивания образов выполняются при первом старте контейнеров, но можно (не обязательно), скачать образы последовательно вручную.
 
+Для `docker` в `Windows`
+
 ```
 docker pull aggrik/pyspark:latest
 docker pull aggrik/greenplum_stable:latest
@@ -17,6 +19,19 @@ docker pull aggrik/postgresql:latest
 docker pull aggrik/superset:latest
 docker pull aggrik/tarantool:latest
 docker pull aggrik/clickhouse:latest
+```
+
+Для `kubernates` в `Linux`
+
+```
+sudo ctr -n=k8s.io image pull docker.io/aggrik/pyspark:latest
+sudo ctr -n=k8s.io image pull docker.io/aggrik/greenplum_stable:latest
+sudo ctr -n=k8s.io image pull docker.io/aggrik/minio:latest
+sudo ctr -n=k8s.io image pull docker.io/aggrik/mlflow:latest
+sudo ctr -n=k8s.io image pull docker.io/aggrik/postgresql:latest
+sudo ctr -n=k8s.io image pull docker.io/aggrik/superset:latest
+sudo ctr -n=k8s.io image pull docker.io/aggrik/tarantool:latest
+
 ```
 
 # Запуск
