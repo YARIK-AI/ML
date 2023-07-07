@@ -1,0 +1,149 @@
+{
+	"folders": {},
+	"connections": {
+		"greenplum-jdbc-1893057f9c5-32de9488c1a26798": {
+			"provider": "greenplum",
+			"driver": "greenplum-jdbc",
+			"name": "greenplum (dba)",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "31832",
+				"url": "jdbc:postgresql://localhost:31832/",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-non-default-db@": "false",
+					"@dbeaver-show-template-db@": "false",
+					"@dbeaver-show-unavailable-db@": "false",
+					"show-database-statistics": "false",
+					"@dbeaver-read-all-data-types-db@": "false",
+					"@dbeaver-use-prepared-statements-db@": "false",
+					"postgresql.dd.plain.string": "false",
+					"postgresql.dd.tag.string": "false"
+				},
+				"auth-model": "native"
+			}
+		},
+		"greenplum-jdbc-1893057f9fd-6b3d5196e9c11891": {
+			"provider": "greenplum",
+			"driver": "greenplum-jdbc",
+			"name": "greenplum (sdl)",
+			"configuration": {
+				"host": "localhost",
+				"port": "5432",
+				"database": "sdl",
+				"url": "jdbc:postgresql://localhost:5432/sdl",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-non-default-db@": "false",
+					"@dbeaver-show-template-db@": "false",
+					"@dbeaver-show-unavailable-db@": "false",
+					"show-database-statistics": "false",
+					"@dbeaver-read-all-data-types-db@": "false",
+					"@dbeaver-use-prepared-statements-db@": "false",
+					"postgresql.dd.plain.string": "false",
+					"postgresql.dd.tag.string": "false"
+				},
+				"auth-model": "native"
+			}
+		},
+		"A630317D-F282-8304-8A8B-DC4F837D45DF-1893058203f-79708fab6d155793": {
+			"provider": "generic",
+			"driver": "A630317D-F282-8304-8A8B-DC4F837D45DF",
+			"name": "tarantool",
+			"save-password": true,
+			"configuration": {
+				"url": "jdbc:tarantool://localhost:32031?user\u003dadmin\u0026password\u003dadmin",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"auth-model": "native"
+			}
+		},
+		"yandex_clickhouse-189305d5dec-79a798c5dc9ea20c": {
+			"provider": "clickhouse",
+			"driver": "yandex_clickhouse",
+			"name": "clickhouse",
+			"save-password": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "32023",
+				"database": "default",
+				"url": "jdbc:clickhouse://localhost:32023/default",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"properties": {
+					"socket_timeout": "360000",
+					"max_execution_time": "360"
+				},
+				"auth-model": "native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Разработка",
+			"color": "255,255,255",
+			"description": "База данных для разработки",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	},
+	"drivers": {
+		"generic": {
+			"A630317D-F282-8304-8A8B-DC4F837D45DF": {
+				"provider": "generic",
+				"id": "A630317D-F282-8304-8A8B-DC4F837D45DF",
+				"name": "tarantool",
+				"class": "org.tarantool.jdbc.SQLDriver",
+				"custom": true,
+				"embedded": false,
+				"anonymous": false,
+				"allowsEmptyPassword": false,
+				"instantiable": true,
+				"libraries": {},
+				"driver-parameters": {
+					"read-only-data": "false",
+					"supports-indexes": "true",
+					"all-objects-pattern": "%",
+					"quote-reserved-words": "true",
+					"omit-schema": "false",
+					"supports-table-constraints": "true",
+					"schema-filters-enabled": "false",
+					"supports-delimiter-in-views": "true",
+					"supports-embedded-database-creation": "true",
+					"supports-struct-cache": "true",
+					"supports-truncate": "true",
+					"read-only-meta-data": "false",
+					"omit-type-cache": "false",
+					"split-procedures-and-functions": "false",
+					"supports-stored-code": "true",
+					"supports-references": "true",
+					"supports-multi-insert": "false",
+					"omit-catalog-name": "false",
+					"supports-catalog-selection": "true",
+					"omit-single-catalog": "false",
+					"ddl-drop-column-brackets": "false",
+					"omit-single-schema": "false",
+					"supports-scroll": "false",
+					"omit-catalog": "false",
+					"supports-views": "true",
+					"script-delimiter": ";",
+					"legacy-sql-dialect": "false",
+					"script-delimiter-after-query": "false",
+					"use-search-string-escape": "false",
+					"supports-multiple-results": "false",
+					"script-delimiter-after-block": "false",
+					"supports-schema-selection": "true",
+					"alter-table-add-column": "false",
+					"ddl-drop-column-short": "false",
+					"supports-limits": "true",
+					"supports-select-count": "true"
+				}
+			}
+		}
+	}
+}
