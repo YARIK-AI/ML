@@ -16,6 +16,7 @@ docker pull aggrik/mlflow:latest
 docker pull aggrik/postgresql:latest
 docker pull aggrik/superset:latest
 docker pull aggrik/tarantool:latest
+docker pull aggrik/clickhouse:latest
 ```
 
 # Запуск
@@ -35,6 +36,7 @@ kubectl apply -f .\postgres-mlflow\
 kubectl apply -f .\mlflow\
 kubectl apply -f .\postgres-superset\
 kubectl apply -f .\superset\
+kubectl apply -f .\clickhouse\
 ```
 
 # Удаление
@@ -48,6 +50,7 @@ kubectl delete -f .\postgres-mlflow\
 kubectl delete -f .\mlflow\
 kubectl delete -f .\postgres-superset\
 kubectl delete -f .\superset\
+kubectl delete -f .\clickhouse\
 ```
 
 # Проверка работоспособности
@@ -64,6 +67,9 @@ passowrd - adminminio
 
 `http://localhost:31188/jupyter/?token=822fce15430e96de9bc18fedf9f938796db4c7927f912028`
 
+## Clickhouse
+
+http://localhost:32023/play
 
 # Перепределение сетевых портов
 
@@ -117,3 +123,11 @@ netsh interface portproxy add v4tov4 protocol=tcp connectaddress=localhost conne
 netsh interface portproxy delete v4tov4 protocol=tcp listenport=9001
 netsh interface portproxy delete v4tov4 protocol=tcp listenport=9000
 ```
+
+Для clickhouse
+
+```
+# переназначить порт 32023 на 8123
+netsh interface portproxy add v4tov4 protocol=tcp connectaddress=localhost connectport=32023 listenport=8123
+# удалить назначение
+netsh interface portproxy delete v4tov4 protocol=tcp listenport=8123
