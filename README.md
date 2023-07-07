@@ -43,29 +43,29 @@ sudo ctr -n=k8s.io image pull docker.io/aggrik/tarantool:latest
 - superset зависит от postgres-superset
 
 ```
-kubectl apply -f .\greenplum\
-kubectl apply -f .\jupyter\
-kubectl apply -f .\minio\
-kubectl apply -f .\tarantool\
-kubectl apply -f .\postgres-mlflow\
-kubectl apply -f .\mlflow\
-kubectl apply -f .\postgres-superset\
-kubectl apply -f .\superset\
-kubectl apply -f .\clickhouse\
+kubectl apply -f ./greenplum/
+kubectl apply -f ./jupyter/
+kubectl apply -f ./minio/
+kubectl apply -f ./tarantool/
+kubectl apply -f ./postgres-mlflow/
+kubectl apply -f ./mlflow/
+kubectl apply -f ./postgres-superset/
+kubectl apply -f ./superset/
+kubectl apply -f ./clickhouse/
 ```
 
 # Удаление
 
 ```
-kubectl delete -f .\greenplum\
-kubectl delete -f .\jupyter\
-kubectl delete -f .\minio\
-kubectl delete -f .\tarantool\
-kubectl delete -f .\postgres-mlflow\
-kubectl delete -f .\mlflow\
-kubectl delete -f .\postgres-superset\
-kubectl delete -f .\superset\
-kubectl delete -f .\clickhouse\
+kubectl delete -f ./greenplum/
+kubectl delete -f ./jupyter/
+kubectl delete -f ./minio/
+kubectl delete -f ./tarantool/
+kubectl delete -f ./postgres-mlflow/
+kubectl delete -f ./mlflow/
+kubectl delete -f ./postgres-superset/
+kubectl delete -f ./superset/
+kubectl delete -f ./clickhouse/
 ```
 
 # Проверка работоспособности
