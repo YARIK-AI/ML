@@ -1,0 +1,15 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: postgres-for-airflow
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : postgres-airflow # Selecting PODS
+  ports:
+    - name      : postgres-airflow
+      protocol  : TCP
+      targetPort: 5432  # Port on POD
+      port      : 5432

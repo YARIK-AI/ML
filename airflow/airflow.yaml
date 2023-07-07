@@ -1,0 +1,200 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: airflow-web
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : airflow  # Selecting PODS
+  ports:
+    - name      : webui # StateStore debug Web UI for administrators to monitor and troubleshoot
+      protocol  : TCP
+      targetPort: 8080       # Port on POD
+      nodePort  : 32088       # Port on Load Balancer
+      port      : 3132
+  type: NodePort
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: connection-params
+type: Opaque
+data:
+  AWS_ACCESS_KEY_ID: YWRtaW5taW5pbw==
+  AWS_SECRET_ACCESS_KEY: YWRtaW5taW5pbw==
+  GP_USER: Z3BhZG1pbg==
+  GP_PASS: Z3BhZG1pbg==
+  CH_USER: YWRtaW4=
+  CH_PASS: VmpyaHNxQ3l0dVBidmpxMjAyMw==
+  HIVE_PASS: aGl2ZQ==
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: airflow-webconf
+data:
+  webserver_config.py: |-
+    # Licensed to the Apache Software Foundation (ASF) under one
+    # or more contributor license agreements.  See the NOTICE file
+    # distributed with this work for additional information
+    # regarding copyright ownership.  The ASF licenses this file
+    # to you under the Apache License, Version 2.0 (the
+    # "License"); you may not use this file except in compliance
+    # with the License.  You may obtain a copy of the License at
+    #
+    #   http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing,
+    # software distributed under the License is distributed on an
+    # "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    # KIND, either express or implied.  See the License for the
+    # specific language governing permissions and limitations
+    # under the License.
+    """Default configuration for the Airflow webserver"""
+    import os
+    from airflow.www.fab_security.manager import AUTH_DB
+    # from airflow.www.fab_security.manager import AUTH_LDAP
+    # from airflow.www.fab_security.manager import AUTH_OAUTH
+    # from airflow.www.fab_security.manager import AUTH_OID
+    # from airflow.www.fab_security.manager import AUTH_REMOTE_USER
+    basedir = os.path.abspath(os.path.dirname(__file__))
+
+    # Flask-WTF flag for CSRF
+    WTF_CSRF_ENABLED = True
+    SESSION_COOKIE_NAME = 'session-airflow'
+    # ----------------------------------------------------
+    # AUTHENTICATION CONFIG
+    # ----------------------------------------------------
+    # For details on how to set up each of the following authentication, see
+    # http://flask-appbuilder.readthedocs.io/en/latest/security.html# authentication-methods
+    # for details.
+
+    # The authentication type
+    # AUTH_OID : Is for OpenID
+    # AUTH_DB : Is for database
+    # AUTH_LDAP : Is for LDAP
+    # AUTH_REMOTE_USER : Is for using REMOTE_USER from web server
+    # AUTH_OAUTH : Is for OAuth
+    AUTH_TYPE = AUTH_DB
+---
+apiVersion: v1
+automountServiceAccountToken: true
+kind: ServiceAccount
+metadata:
+  name: spark
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: spark-role
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+subjects:
+- kind: ServiceAccount
+  name: spark
+  namespace: default
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: airflow-run
+data:
+  run.sh: |-
+    #!/bin/bash
+    aws s3 cp s3://programs/dags.tar.gz dags.tar.gz --endpoint-url http://minio:9000/ 
+    tar zxvf dags.tar.gz
+    cp -R dags /root/airflow
+    airflow standalone
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: airflow-init
+data:
+  init.sh: |-
+    #!/bin/bash
+    airflow db init
+    airflow users delete -u admin
+    airflow users create --username admin --firstname admin --lastname adminovich --role Admin --email admin@lllal.org --password admin
+---
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: airflow
+  labels:
+    app : airflow
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project: test
+  template:
+    metadata:
+      labels:
+        app : airflow
+        project: test
+    spec:
+      serviceAccountName: spark
+      initContainers:
+        - name : init-airflow
+          resources: {}
+          image : aggrik/airflow:latest
+          imagePullPolicy: IfNotPresent
+          command: ["bash", "-c", "/opt/init.sh"]
+          volumeMounts:
+            - name: configmap-airflow-init
+              mountPath: /opt/init.sh
+              readOnly: true
+              subPath: init.sh  
+            - name: configmap-airflow-cfg
+              mountPath: /root/airflow/airflow.cfg
+              readOnly: false
+              subPath: airflow.cfg
+      containers:
+        - name : airflow
+          resources: {}
+          image : aggrik/airflow:latest
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: MINIO_ACCESS_KEY
+            value: adminminio
+          - name: MINIO_SECRET_KEY
+            value: adminminio       
+          command:
+          - bash
+          - -c
+          - /bin/run.sh
+          volumeMounts:
+            - name: configmap-airflow-run
+              mountPath: /bin/run.sh
+              readOnly: true
+              subPath: run.sh    
+            - name: configmap-airflow-cfg
+              mountPath: /root/airflow/airflow.cfg
+              readOnly: false
+              subPath: airflow.cfg
+            - name: configmap-airflow-webserver-cfg
+              mountPath: /root/airflow/webserver_config.py
+              readOnly: false
+              subPath: webserver_config.py
+      volumes:
+       - name: configmap-airflow-cfg
+         configMap:
+           defaultMode: 0700
+           name: airflowcfg
+       - name: configmap-airflow-webserver-cfg
+         configMap:
+           defaultMode: 0700
+           name: airflow-webconf
+       - name: configmap-airflow-run
+         configMap:
+           defaultMode: 0700
+           name: airflow-run   
+       - name: configmap-airflow-init
+         configMap:
+           defaultMode: 0700
+           name: airflow-init 

@@ -19,6 +19,7 @@ docker pull aggrik/postgresql:latest
 docker pull aggrik/superset:latest
 docker pull aggrik/tarantool:latest
 docker pull aggrik/clickhouse:latest
+docker pull aggrik/airflow:latest
 ```
 
 Для `kubernetes` в `Linux`
@@ -32,7 +33,7 @@ sudo ctr -n=k8s.io image pull docker.io/aggrik/postgresql:latest
 sudo ctr -n=k8s.io image pull docker.io/aggrik/superset:latest
 sudo ctr -n=k8s.io image pull docker.io/aggrik/tarantool:latest
 sudo ctr -n=k8s.io image pull docker.io/aggrik/clickhouse:latest
-
+sudo ctr -n=k8s.io image pull docker.io/aggrik/airflow:latest
 ```
 
 # Запуск
@@ -42,6 +43,7 @@ sudo ctr -n=k8s.io image pull docker.io/aggrik/clickhouse:latest
 - mlflow зависит от minio
 - mlflow зависит от postgres-mlflow
 - superset зависит от postgres-superset
+- airflow зависит от postgres-airflow
 
 ```
 kubectl apply -f ./greenplum/
@@ -53,6 +55,8 @@ kubectl apply -f ./mlflow/
 kubectl apply -f ./postgres-superset/
 kubectl apply -f ./superset/
 kubectl apply -f ./clickhouse/
+kubectl apply -f ./postgres-airflow/
+kubectl apply -f ./airflow/
 ```
 
 # Удаление
@@ -67,6 +71,8 @@ kubectl delete -f ./mlflow/
 kubectl delete -f ./postgres-superset/
 kubectl delete -f ./superset/
 kubectl delete -f ./clickhouse/
+kubectl delete -f ./postgres-airflow/
+kubectl delete -f ./airflow/
 ```
 
 # Проверка работоспособности
@@ -84,11 +90,17 @@ passowrd - adminminio
 `http://localhost:31188/jupyter/?token=822fce15430e96de9bc18fedf9f938796db4c7927f912028`
 
 ## Clickhouse
-
+```
 http://localhost:32023/play
 login - admin
 passowrd - admin
-
+```
+## Airflow
+```
+http://localhost:32088
+login - admin
+passowrd - admin
+```
 # Перепределение сетевых портов
 
 При необходимости можно переназначить сетевые порты на более привычные для соотвествующих сервисов. При переназначении высокий порт будет также доступен, но добавляется новый из более низкого диапазона. Для выполнения команды требуется запустить `Powershell` с правами администратора.
@@ -149,3 +161,13 @@ netsh interface portproxy delete v4tov4 protocol=tcp listenport=9000
 netsh interface portproxy add v4tov4 protocol=tcp connectaddress=localhost connectport=32023 listenport=8123
 # удалить назначение
 netsh interface portproxy delete v4tov4 protocol=tcp listenport=8123
+```
+
+Для airflow
+
+```
+# переназначить порт 32088 на 8089
+netsh interface portproxy add v4tov4 protocol=tcp connectaddress=localhost connectport=32088 listenport=8089
+# удалить назначение
+netsh interface portproxy delete v4tov4 protocol=tcp listenport=8089
+```
