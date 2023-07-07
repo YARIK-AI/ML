@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: superset-envs
+data:
+  DATABASE_DB: superset
+  DATABASE_HOST: postgres-superset
+  DATABASE_PASSWORD: superset
+  DATABASE_USER: superset
+  DATABASE_PORT: '5432'
+  DATABASE_DIALECT: postgresql
+  POSTGRES_DB: superset
+  POSTGRES_USER: superset
+  POSTGRES_PASSWORD: superset
+  PYTHONPATH: /app/pythonpath:/app/docker/pythonpath_dev
+  REDIS_HOST: redis-for-superset
+  REDIS_PORT: '6379'
+  SUPERSET_PORT: '8088'
+  PYTHONIOENCODING: UTF-8
+  GUNICORN_TIMEOUT: '120'

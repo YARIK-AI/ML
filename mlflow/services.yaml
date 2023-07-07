@@ -1,0 +1,29 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: mlflow
+  labels:
+    env: prod
+    owner: user
+spec:
+  clusterIP: None
+  selector:
+    app : mlflow  # Selecting PODS
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: mlflow-web
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : mlflow # Selecting PODS
+  ports:
+    - name      : mlflow-web
+      protocol  : TCP
+      targetPort: 5000  # Port on POD
+      nodePort  : 32050  # Port on Load Balancer
+      port      : 3333
+  type: NodePort

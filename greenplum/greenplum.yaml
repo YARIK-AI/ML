@@ -1,0 +1,141 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: greenplum-singlenode-init
+data:
+  gpinitsystem_singlenode: |-
+    ARRAY_NAME="GPDB SINGLENODE"
+    SEG_PREFIX=gpsne
+    PORT_BASE=6000
+    declare -a DATA_DIRECTORY=(/home/gpadmin/primary /home/gpadmin/primary)
+    MASTER_HOSTNAME=greenplum
+    MASTER_DIRECTORY=/gpdata
+    MASTER_PORT=5432
+    TRUSTED_SHELL=ssh
+    CHECK_POINT_SEGMENTS=8
+    ENCODING=UNICODE
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: greenplum-hostlist
+data:
+  hostlist_singlenode: |-
+    greenplum
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: greenplum-init
+data:
+  run.sh: |-
+    #!/bin/bash
+    FILE=/gpdata/gpsne-1/pg_hba.conf
+    if [ -f "$FILE" ]; then
+        echo "Starting greenplum"
+        exit 0
+    else 
+        source /usr/local/greenplum-db/greenplum_path.sh
+        sh /home/gpadmin/init.sh
+        sudo chmod 777 /gpdata/gpsne-1/pg_hba.conf 
+        echo "host all all 0.0.0.0/0 md5" >> /gpdata/gpsne-1/pg_hba.conf
+        gpstop -d /gpdata/gpsne-1 -a
+        exit 0
+    fi
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: greenplum-start
+data:
+  start.sh: |-
+    #!/bin/bash
+    source /usr/local/greenplum-db/greenplum_path.sh
+    sh /home/gpadmin/start.sh
+    psql -d postgres -c "alter user gpadmin password 'gpadmin'"
+---
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: greenplum
+  labels:
+    app : greenplum
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project: test
+  template:
+    metadata:
+      labels:
+        app : greenplum
+        project: test
+    spec:
+      hostname: greenplum
+      initContainers:
+        - name : greenplum-init
+          resources: {}
+          image : aggrik/greenplum_stable:latest
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: PXF_JVM_OPTS
+            value: "-Xms1294967296 -Xmx1294967296"
+          command: ["bash","-c", "/opt/run.sh"]
+          volumeMounts:
+            - mountPath: /home/gpadmin/primary
+              name: greenplum-primary
+              readOnly: false
+            - mountPath: /gpdata
+              name: greenplum-data
+            - name: configmap-greenplum-init
+              mountPath: /opt/run.sh
+              readOnly: false
+              subPath: run.sh
+            - name: configmap-greenplum-singlenode-init
+              mountPath: /home/gpadmin/gpinitsystem_singlenode
+              readOnly: false
+              subPath: gpinitsystem_singlenode
+            - name: configmap-greenplum-hostlist
+              mountPath: /home/gpadmin/hostlist_singlenode
+              readOnly: false
+              subPath: hostlist_singlenode            
+      containers:
+        - name : greenplum
+          resources: {}
+          image : aggrik/greenplum_stable:latest
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: PXF_JVM_OPTS
+            value: "-Xms1294967296 -Xmx1294967296"
+          command: ["bash","-c", "/opt/start.sh && tail -f /tmp/gpAdminLogs/*.log"] 
+          volumeMounts:
+            - mountPath: /home/gpadmin/primary
+              name: greenplum-primary
+              readOnly: false
+            - mountPath: /gpdata
+              name: greenplum-data
+            - name: configmap-greenplum-start
+              mountPath: /opt/start.sh
+              readOnly: false
+              subPath: start.sh
+      volumes:
+       - name: greenplum-primary
+         emptyDir: {}
+       - name: greenplum-data
+         emptyDir: {}
+       - name: configmap-greenplum-start
+         configMap:
+           defaultMode: 0777
+           name: greenplum-start
+       - name: configmap-greenplum-init
+         configMap:
+           defaultMode: 0777
+           name: greenplum-init
+       - name: configmap-greenplum-singlenode-init
+         configMap:
+           defaultMode: 0777
+           name: greenplum-singlenode-init
+       - name: configmap-greenplum-hostlist
+         configMap:
+           defaultMode: 0777
+           name: greenplum-hostlist          

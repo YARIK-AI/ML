@@ -1,0 +1,38 @@
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: minio
+  labels:
+    app : minio
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project: test
+  template:
+    metadata:
+      labels:
+        app : minio
+        project: test
+    spec:
+      containers:
+        - name : minio
+          image : aggrik/minio:latest
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: MINIO_ACCESS_KEY
+            value: adminminio
+          - name: MINIO_SECRET_KEY
+            value: adminminio
+          command:
+          - /bin/bash
+          - -c
+          args: 
+          - minio server /data --console-address :9001
+          volumeMounts:
+            - mountPath: /data
+              name: minio-data
+      volumes:
+       - name: minio-data
+         emptyDir: {}
+

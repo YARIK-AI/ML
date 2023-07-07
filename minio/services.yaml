@@ -1,0 +1,47 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: minio
+  labels:
+    env: prod
+    owner: user
+spec:
+  clusterIP: None
+  selector:
+    app : minio  # Selecting PODS
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: minio-web
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : minio # Selecting PODS
+  ports:
+    - name      : minio-web
+      protocol  : TCP
+      targetPort: 9001  # Port on POD
+      nodePort  : 32010  # Port on Load Balancer
+      port      : 3333
+  type: NodePort
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: minio-remote
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : minio # Selecting PODS
+  ports:
+    - name      : minio-web
+      protocol  : TCP
+      targetPort: 9000  # Port on POD
+      nodePort  : 32020  # Port on Load Balancer
+      port      : 3333
+  type: NodePort

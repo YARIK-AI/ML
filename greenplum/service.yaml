@@ -1,0 +1,33 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: greenplum
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : greenplum # Selecting PODS
+  ports:
+    - name      : greenplum
+      protocol  : TCP
+      targetPort: 5432  # Port on POD
+      port      : 5432
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: greenplum-jdbc
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : greenplum  # Selecting PODS
+  ports:
+    - name      : webui # StateStore debug Web UI for administrators to monitor and troubleshoot
+      protocol  : TCP
+      targetPort: 5432       # Port on POD
+      nodePort  : 31832      # Port on Load Balancer
+      port      : 3127
+  type: NodePort

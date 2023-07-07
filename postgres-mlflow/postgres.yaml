@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-mlflow-run
+data:
+  init.sh: |-
+    #!/bin/bash
+    /usr/lib/postgresql/14/bin/initdb -D /var/lib/postgresql/14/main/
+    # Start postgress and create test user and db
+    /etc/init.d/postgresql start 
+    a=$(psql -l | awk '{print $1}' | grep mlflow_db)
+    if [ -z $a ]; then
+       echo "INIT STARTED"
+        psql --command "CREATE USER mlflow_user WITH SUPERUSER PASSWORD 'mlflow';" 
+        createdb -O mlflow_user mlflow_db 
+       /etc/init.d/postgresql stop
+       echo "INIT FINISHED"
+    else
+       /etc/init.d/postgresql stop
+       echo "INIT IS NOT REQUIRED"
+    fi
+    sleep 10
+    echo "DONE"
+
+  run.sh: |-
+    #!/bin/bash
+    echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/14/main/pg_hba.conf
+    echo "listen_addresses='*'" >> /etc/postgresql/14/main/postgresql.conf
+    /usr/lib/postgresql/14/bin/postgres -D /var/lib/postgresql/14/main -c config_file=/etc/postgresql/14/main/postgresql.conf
+---
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: postgres-mlflow
+  labels:
+    app : postgres-mlflow
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project: test
+  template:
+    metadata:
+      labels:
+        app : postgres-mlflow
+        project: test
+    spec:
+      containers:
+        - name : postgres-mlflow
+          resources: {}
+          image : aggrik/postgresql:latest
+          command: #["bash","-c", "tail -f"]
+          - /opt/run/run.sh    
+          volumeMounts:
+            - mountPath: /var/lib/postgresql
+              name: postgresql-mlflow
+              readOnly: false
+            - mountPath: /opt/run/
+              name: configmap-postgres-mlflow-volume
+              readOnly: true
+      initContainers:
+        - name: init-postgres-mlflow
+          image : aggrik/postgresql:latest
+          imagePullPolicy: IfNotPresent
+          command: #
+          - /opt/run/init.sh    
+          volumeMounts:
+            - mountPath: /var/lib/postgresql
+              name: postgresql-mlflow
+            - mountPath: /opt/run/
+              name: configmap-postgres-mlflow-volume
+              readOnly: true
+      volumes:
+        - name: postgresql-mlflow
+          emptyDir: {}
+        - name: configmap-postgres-mlflow-volume
+          configMap:
+            defaultMode: 0777
+            name: postgres-mlflow-run

@@ -1,0 +1,30 @@
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: mlflow
+  labels:
+    app : mlflow
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project: test
+  template:
+    metadata:
+      labels:
+        app : mlflow
+        project: test
+    spec:
+      containers:
+        - name : mlflow
+          image : aggrik/mlflow:latest
+          imagePullPolicy: IfNotPresent
+          command: ["/root/miniconda/bin/conda", "run", "-n", "mlflow-env", "/bin/bash", "-c", 'mlflow  server  --backend-store-uri postgresql://mlflow_user:mlflow@postgres-mlflow/mlflow_db --default-artifact-root s3://mlflow/  --artifacts-destination s3://mlflow/ --host 0.0.0.0  --serve-artifacts  --gunicorn-opts "--log-level debug --error-logfile /var/log/gunicorn_error.log" ']
+          env:
+          - name: AWS_ACCESS_KEY_ID
+            value: "adminminio"
+          - name: AWS_SECRET_ACCESS_KEY
+            value: "adminminio"
+          - name: MLFLOW_S3_ENDPOINT_URL
+            value: "http://minio:9000"
+

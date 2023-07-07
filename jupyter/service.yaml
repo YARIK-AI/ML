@@ -1,0 +1,17 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: jupyter-web
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : jupyter  # Selecting PODS
+  ports:
+    - name      : jupyter-webui # StateStore debug Web UI for administrators to monitor and troubleshoot
+      protocol  : TCP
+      targetPort: 8888       # Port on POD
+      nodePort  : 31188       # Port on Load Balancer
+      port      : 3132
+  type: NodePort

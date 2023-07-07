@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tarantool-run
+data:
+  run.lua: |-
+    box.cfg{
+      listen = 3301,
+      memtx_memory = 512 * 1024 * 1024,
+      memtx_max_tuple_size = 1024 * 1024
+    }
+    box.schema.user.passwd('admin')
+---

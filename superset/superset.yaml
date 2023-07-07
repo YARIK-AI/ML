@@ -1,0 +1,57 @@
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: superset
+  labels:
+    app : superset
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project: test
+  template:
+    metadata:
+      labels:
+        app : superset
+        project: test
+    spec:
+      initContainers:
+        - name: init-superset
+          envFrom:
+          - configMapRef:
+              name: superset-envs
+          image : aggrik/superset:latest
+          imagePullPolicy: IfNotPresent
+          command: ["bash", "-c", "/app/docker/docker-init.sh"]
+          volumeMounts:
+            - mountPath: /app/docker
+              name: configmap-superset-config
+            - name: configmap-superset-server-prop
+              mountPath: /app/pythonpath/superset_config.py
+              readOnly: false
+              subPath: superset_config.py
+      containers:
+        - name : superset
+          envFrom:
+          - configMapRef:
+              name: superset-envs
+          image : aggrik/superset:latest
+          imagePullPolicy: IfNotPresent
+          command: ["bash", "-c", "/app/docker/docker-bootstrap.sh app-gunicorn"]
+          #command: ["bash", "-c", "tail -f"]
+          volumeMounts:
+            - mountPath: /app/docker
+              name: configmap-superset-config
+            - name: configmap-superset-server-prop
+              mountPath: /app/pythonpath/superset_config.py
+              readOnly: false
+              subPath: superset_config.py
+      volumes:
+       - name: configmap-superset-server-prop
+         configMap:
+           defaultMode: 0775
+           name: superset-props
+       - name: configmap-superset-config
+         configMap:
+           defaultMode: 0775
+           name: config-superset

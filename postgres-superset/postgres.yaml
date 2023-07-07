@@ -1,0 +1,80 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-superset
+data:
+  init.sh: |-
+    #!/bin/bash
+    /usr/lib/postgresql/14/bin/initdb -D /var/lib/postgresql/14/main/
+    # Start postgress and create test user and db
+    /etc/init.d/postgresql start 
+    a=$(psql -l | awk '{print $1}' | grep superset)
+    if [ -z $a ]; then
+       echo "INIT STARTED"
+       psql --command "CREATE USER superset WITH SUPERUSER PASSWORD 'superset';"
+       createdb -O superset superset 
+       /etc/init.d/postgresql stop
+       echo "INIT FINISHED"
+    else
+       /etc/init.d/postgresql stop
+       echo "INIT IS NOT REQUIRED"
+    fi
+    sleep 10
+    echo "DONE"
+
+  run.sh: |-
+    #!/bin/bash
+    echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/14/main/pg_hba.conf
+    echo "listen_addresses='*'" >> /etc/postgresql/14/main/postgresql.conf
+    /usr/lib/postgresql/14/bin/postgres -D /var/lib/postgresql/14/main -c config_file=/etc/postgresql/14/main/postgresql.conf
+---
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: postgres-superset
+  labels:
+    app : postgres-superset
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project : test
+  template:
+    metadata:
+      labels:
+        app : postgres-superset
+        project : test
+    spec:
+      containers:
+        - name : postgres-superset
+          resources: {}
+          image : aggrik/postgresql:latest
+          imagePullPolicy: IfNotPresent
+          command: #
+          - /opt/run/run.sh    
+          volumeMounts:
+            - mountPath: /var/lib/postgresql
+              name: postgresql-superset
+            - mountPath: /opt/run/
+              name: configmap-postgres-superset-volume
+              readOnly: true
+      initContainers:
+        - name: init-postgres-superset
+          image : aggrik/postgresql:latest
+          imagePullPolicy: IfNotPresent
+          command: #
+          - /opt/run/init.sh    
+          volumeMounts:
+            - mountPath: /var/lib/postgresql
+              name: postgresql-superset
+            - mountPath: /opt/run/
+              name: configmap-postgres-superset-volume
+              readOnly: true
+          
+      volumes:
+        - name: postgresql-superset
+          emptyDir: {}
+        - name: configmap-postgres-superset-volume
+          configMap:
+            defaultMode: 0777
+            name: postgres-superset

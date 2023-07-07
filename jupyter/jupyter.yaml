@@ -1,0 +1,72 @@
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: jupyter
+  labels:
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project: test
+  template:
+    metadata:
+      labels:
+        project: test
+        app : jupyter
+    spec:
+      hostname: jupyter
+      containers:
+        - name : jupyter
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: 2
+            limits:
+              memory: "2Gi"
+              cpu: 2
+          image : aggrik/pyspark:latest
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: AWS_ACCESS_KEY_ID
+            value: adminminio
+          - name: AWS_SECRET_ACCESS_KEY
+            value: adminminio
+          - name: AWS_ENDPOINT_URL
+            value: http://minio:9000   
+          - name: MLFLOW_URL
+            value: http://mlflow:5000/
+          - name: MLFLOW_S3_ENDPOINT_URL
+            value: http://minio:9000
+          - name: GREENPLUM_HOST
+            value: greenplum
+          - name: GREENPLUM_SCHEMA
+            value: ml
+          - name: GREENPLUM_PORT
+            value: "5432"
+          - name: GREENPLUM_DATABASE
+            value: sdl
+          - name: GREENPLUM_LOGIN
+            value: gpadmin
+          - name: GREENPLUM_PASSWORD
+            value: gpadmin
+          - name: TARANTOOL_HOST
+            value: tarantool
+          - name: TARANTOOL_PORT
+            value: "3301"
+          - name: TARANTOOL_LOGIN
+            value: admin
+          - name: TARANTOOL_PASSWORD
+            value: admin            
+          command:
+          - bash
+          - -c
+          - /home/sdl/.local/bin/jupyter-lab --ip jupyter --no-browser --NotebookApp.token='822fce15430e96de9bc18fedf9f938796db4c7927f912028' --NotebookApp.base_url=jupyter --NotebookApp.default_url=lab
+          volumeMounts:
+            - mountPath: /home/sdl/workspace
+              name: workspace-data
+              readOnly: false
+      volumes:
+        - name: workspace-data
+          emptyDir: {}
+
+
