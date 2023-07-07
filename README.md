@@ -21,7 +21,7 @@ docker pull aggrik/tarantool:latest
 docker pull aggrik/clickhouse:latest
 ```
 
-Для `kubernates` в `Linux`
+Для `kubernetes` в `Linux`
 
 ```
 sudo ctr -n=k8s.io image pull docker.io/aggrik/pyspark:latest
@@ -31,6 +31,7 @@ sudo ctr -n=k8s.io image pull docker.io/aggrik/mlflow:latest
 sudo ctr -n=k8s.io image pull docker.io/aggrik/postgresql:latest
 sudo ctr -n=k8s.io image pull docker.io/aggrik/superset:latest
 sudo ctr -n=k8s.io image pull docker.io/aggrik/tarantool:latest
+sudo ctr -n=k8s.io image pull docker.io/aggrik/clickhouse:latest
 
 ```
 
@@ -85,6 +86,8 @@ passowrd - adminminio
 ## Clickhouse
 
 http://localhost:32023/play
+login - admin
+passowrd - admin
 
 # Перепределение сетевых портов
 
