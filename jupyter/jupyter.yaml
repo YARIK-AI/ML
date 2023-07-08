@@ -57,6 +57,16 @@ spec:
             value: admin
           - name: TARANTOOL_PASSWORD
             value: admin            
+          - name: CLICKHOUSE_HOST
+            value: clickhouse
+          - name: CLICKHOUSE_PORT
+            value: "8123"
+          - name: CLICKHOUSE_DATABASE
+            value: sdl
+          - name: CLICKHOUSE_LOGIN
+            value: admin
+          - name: CLICKHOUSE_PASSWORD
+            value: admin
           command:
           - bash
           - -c
