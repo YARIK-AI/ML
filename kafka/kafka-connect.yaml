@@ -1,0 +1,123 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: kafka-connect-api
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : kafka-connect  # Selecting PODS
+  ports:
+    - name      : api # StateStore debug Web UI for administrators to monitor and troubleshoot
+      protocol  : TCP
+      targetPort: 8083       # Port on POD
+      nodePort  : 31803       # Port on Load Balancer
+      port      : 3322
+  type: NodePort
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: kafka-connect
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : kafka-connect  # Selecting PODS
+  ports:
+    - name      : kafka-connect
+      protocol  : TCP
+      targetPort: 8083  # Port on POD
+      port      : 8083
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: kafka-connect-syslog-input
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : kafka-connect  # Selecting PODS
+  ports:
+    - name      : syslog-input # StateStore debug Web UI for administrators to monitor and troubleshoot
+      protocol  : UDP
+      targetPort: 514       # Port on POD
+      nodePort  : 32514       # Port on Load Balancer
+      port      : 3322
+  type: NodePort
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kafka-connect
+data:
+  run.sh: |-
+    #!/bin/bash
+    export KAFKA_HEAP_OPTS='-Xmx6g -Xms6g -XX:MetaspaceSize=96m -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:G1HeapRegionSize=16M -XX:MinMetaspaceFreeRatio=50 -XX:MaxMetaspaceFreeRatio=80'
+    export AWS_ENDPOINT_URL=http://minio:9000
+    export AWS_ACCESS_KEY_ID=adminminio
+    export AWS_SECRET_ACCESS_KEY=adminminio
+    aws s3 cp s3://apps/kafka-connect.jar /opt/jars/kafka-connect.jar --endpoint-url $AWS_ENDPOINT_URL
+    bin/connect-distributed.sh /opt/kafka/props/connect-distributed.properties
+
+  connect-distributed.properties: |-
+    bootstrap.servers=broker1:9092,broker2:9092,broker3:9092
+    group.id=connect-cluster
+    key.converter=org.apache.kafka.connect.storage.StringConverter
+    value.converter=org.apache.kafka.connect.storage.StringConverter
+    key.converter.schemas.enable=false
+    value.converter.schemas.enable=false
+    offset.storage.topic=connect-offsets
+    offset.storage.replication.factor=1
+    config.storage.topic=connect-configs
+    config.storage.replication.factor=1
+    status.storage.topic=connect-status
+    status.storage.replication.factor=1
+    offset.flush.interval.ms=10000
+    max.request.size=113637457
+    producer.max.request.size=157286400
+    consumer.max.request.size=157286400
+    producer.partitioner.ignore.keys=true
+    plugin.path=/opt/jars
+---
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: kafka-connect
+  labels:
+    app : kafka-connect
+    project : base
+spec:
+  selector:
+    matchLabels:
+      project: base
+  template:
+    metadata:
+      labels:
+        project: base
+        app : kafka-connect
+    spec:
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name : kafka-connect
+          resources: {}
+          image : aggrik/kafka:latest
+          env:
+            - name: CLASSPATH
+              value: /opt/jars
+          imagePullPolicy : IfNotPresent
+          command: #["bash", "-c", "tail -f "]
+            - /opt/kafka/props/run.sh
+          volumeMounts:
+            - name: configmap-kafka-connect-volume
+              mountPath: /opt/kafka/props
+      volumes:
+       - name: configmap-kafka-connect-volume
+         configMap:
+           defaultMode: 0755
+           name: kafka-connect
+
