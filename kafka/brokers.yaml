@@ -379,7 +379,7 @@ spec:
             - /bin/run.sh
           env:
             - name: KAFKA_OPTS
-              value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent-0.17.2.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
+              value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
           image: aggrik/kafka:latest
           imagePullPolicy: IfNotPresent
           resources: {}
@@ -449,7 +449,7 @@ spec:
             - /bin/run.sh
           env:
             - name: KAFKA_OPTS
-              value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent-0.17.2.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
+              value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
           image: aggrik/kafka:latest
           imagePullPolicy: IfNotPresent
           resources: {}
@@ -519,7 +519,7 @@ spec:
             - /bin/run.sh
           env:
             - name: KAFKA_OPTS
-              value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent-0.17.2.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
+              value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
           image: aggrik/kafka:latest
           imagePullPolicy: IfNotPresent
           resources: {}
