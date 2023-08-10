@@ -1,0 +1,164 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zoo-1
+data:
+  run.sh: |-
+    #!/bin/bash
+    echo 1 > /data/zookeeper/myid
+    /opt/zookeeper/bin/zkServer.sh start-foreground
+    tail -f /opt/zookeeper/bin/zkServer.sh
+---
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: zoo-1
+  labels:
+    app : zoo-1
+    project : base
+spec:
+  selector:
+    matchLabels:
+      project: base
+  template:
+    metadata:
+      labels:
+        project: base
+        app : zoo-1
+    spec:
+      hostname: zkhost1
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name : zoo-1
+          resources: {}
+          image : aggrik/zookeeper:latest
+          imagePullPolicy : IfNotPresent
+          command: 
+            - /bin/run.sh
+          volumeMounts:
+            - name: zoo-1-data
+              mountPath: /data/zookeeper              
+            - name: configmap-zoo-1-volume
+              mountPath: /bin/run.sh
+              readOnly: false
+              subPath: run.sh
+      volumes:
+       - name: zoo-1-data
+         emptyDir: {}
+#         hostPath:
+#           path: /storage/data/zookeeper/zoo-1
+#           type: DirectoryOrCreate
+       - name: configmap-zoo-1-volume
+         configMap:
+           defaultMode: 0775
+           name: zoo-1
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zoo-2
+data:
+  run.sh: |-
+    #!/bin/bash
+    echo 2 > /data/zookeeper/myid
+    /opt/zookeeper/bin/zkServer.sh start-foreground
+    tail -f /opt/zookeeper/bin/zkServer.sh
+---
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: zoo-2
+  labels:
+    app : zoo-2
+    project : base
+spec:
+  selector:
+    matchLabels:
+      project: base
+  template:
+    metadata:
+      labels:
+        project: base
+        app : zoo-2
+    spec:
+      hostname: zkhost2
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name : zoo-2
+          resources: {}
+          image : aggrik/zookeeper:latest
+          imagePullPolicy : IfNotPresent
+          command: 
+            - /bin/run.sh
+          volumeMounts:
+            - name: zoo-2-data
+              mountPath: /data/zookeeper              
+            - name: configmap-zoo-2-volume
+              mountPath: /bin/run.sh
+              readOnly: false
+              subPath: run.sh
+      volumes:
+       - name: zoo-2-data
+         emptyDir: {}
+#         hostPath:
+#           path: /storage/data/zookeeper/zoo-2
+#           type: DirectoryOrCreate
+       - name: configmap-zoo-2-volume
+         configMap:
+           defaultMode: 0775
+           name: zoo-2
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: zoo-3
+data:
+  run.sh: |-
+    #!/bin/bash
+    echo 3 > /data/zookeeper/myid
+    /opt/zookeeper/bin/zkServer.sh start-foreground
+    tail -f /opt/zookeeper/bin/zkServer.sh
+---
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: zoo-3
+  labels:
+    app : zoo-3
+    project : base
+spec:
+  selector:
+    matchLabels:
+      project: base
+  template:
+    metadata:
+      labels:
+        project: base
+        app : zoo-3
+    spec:
+      hostname: zkhost3
+      dnsPolicy: ClusterFirstWithHostNet
+      containers:
+        - name : zoo-3
+          resources: {}
+          image : aggrik/zookeeper:latest
+          imagePullPolicy : IfNotPresent
+          command: 
+            - /bin/run.sh
+          volumeMounts:
+            - name: zoo-3-data
+              mountPath: /data/zookeeper              
+            - name: configmap-zoo-3-volume
+              mountPath: /bin/run.sh
+              readOnly: false
+              subPath: run.sh
+      volumes:
+       - name: zoo-3-data
+         emptyDir: {}
+#         hostPath:
+#           path: /storage/data/zookeeper/zoo-1
+#           type: DirectoryOrCreate
+       - name: configmap-zoo-3-volume
+         configMap:
+           defaultMode: 0775
+           name: zoo-3
