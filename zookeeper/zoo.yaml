@@ -1,3 +1,40 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: zkhost1
+  labels:
+    env: prod
+    owner: user
+spec:
+  clusterIP: None
+  selector:
+    app : zoo-1  # Selecting PODS
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: zkhost2
+  labels:
+    env: prod
+    owner: user
+spec:
+  clusterIP: None
+  selector:
+    app : zoo-2  # Selecting PODS
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: zkhost3
+  labels:
+    env: prod
+    owner: user
+spec:
+  clusterIP: None
+  selector:
+    app : zoo-3  # Selecting PODS
+
+---
 apiVersion: v1
 kind: ConfigMap
 metadata:
