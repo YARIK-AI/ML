@@ -156,7 +156,13 @@ spec:
               subPath: airflow.cfg
       containers:
         - name : airflow
-          resources: {}
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: 1
+            limits:
+              memory: "1Gi"
+              cpu: 1
           image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
           env:

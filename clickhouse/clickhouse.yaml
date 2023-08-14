@@ -192,6 +192,13 @@ spec:
       containers:
         - name : clickhouse
           image : aggrik/clickhouse:latest
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: 1
+            limits:
+              memory: "512Mi"
+              cpu: 1          
           imagePullPolicy: IfNotPresent
           volumeMounts:
             - mountPath: /etc/clickhouse-server
