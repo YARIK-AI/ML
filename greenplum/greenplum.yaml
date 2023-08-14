@@ -112,7 +112,7 @@ spec:
           imagePullPolicy: IfNotPresent
           env:
           - name: PXF_JVM_OPTS
-            value: "-Xms512000000 -Xmx512000000"
+            value: "-Xms128m -Xmx128m"
           command: ["bash","-c", "/opt/start.sh && tail -f /tmp/gpAdminLogs/*.log"] 
           volumeMounts:
             - mountPath: /home/gpadmin/primary

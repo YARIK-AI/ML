@@ -158,10 +158,10 @@ spec:
         - name : airflow
           resources:
             requests:
-              memory: "512Mi"
+              memory: "1Gi"
               cpu: 1
             limits:
-              memory: "512Mi"
+              memory: "1Gi"
               cpu: 1
           image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
