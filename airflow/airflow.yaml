@@ -17,20 +17,6 @@ spec:
   type: NodePort
 ---
 apiVersion: v1
-kind: Secret
-metadata:
-  name: connection-params
-type: Opaque
-data:
-  AWS_ACCESS_KEY_ID: YWRtaW5taW5pbw==
-  AWS_SECRET_ACCESS_KEY: YWRtaW5taW5pbw==
-  GP_USER: Z3BhZG1pbg==
-  GP_PASS: Z3BhZG1pbg==
-  CH_USER: YWRtaW4=
-  CH_PASS: VmpyaHNxQ3l0dVBidmpxMjAyMw==
-  HIVE_PASS: aGl2ZQ==
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
   name: airflow-webconf
