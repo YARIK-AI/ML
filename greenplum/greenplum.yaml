@@ -101,12 +101,18 @@ spec:
               subPath: hostlist_singlenode            
       containers:
         - name : greenplum
-          resources: {}
           image : aggrik/greenplum_stable:latest
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: 1
+            limits:
+              memory: "512Mi"
+              cpu: 1             
           imagePullPolicy: IfNotPresent
           env:
           - name: PXF_JVM_OPTS
-            value: "-Xms1294967296 -Xmx1294967296"
+            value: "-Xms512000000 -Xmx512000000"
           command: ["bash","-c", "/opt/start.sh && tail -f /tmp/gpAdminLogs/*.log"] 
           volumeMounts:
             - mountPath: /home/gpadmin/primary

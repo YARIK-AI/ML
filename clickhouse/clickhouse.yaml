@@ -182,10 +182,10 @@ spec:
           image : aggrik/clickhouse:latest
           resources:
             requests:
-              memory: "1Gi"
+              memory: "512Mi"
               cpu: 1
             limits:
-              memory: "1Gi"
+              memory: "512Mi"
               cpu: 1          
           imagePullPolicy: IfNotPresent
           volumeMounts:
