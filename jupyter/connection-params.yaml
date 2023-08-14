@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: connection-params
+type: Opaque
+data:
+  AWS_ACCESS_KEY_ID: YWRtaW5taW5pbw==
+  AWS_SECRET_ACCESS_KEY: YWRtaW5taW5pbw==
+  GREENPLUM_LOGIN: Z3BhZG1pbg==
+  GREENPLUM_PASSWORD: Z3BhZG1pbg==
+  TARANTOOL_LOGIN: YWRtaW4=
+  TARANTOOL_PASSWORD: YWRtaW4=
+  CLICKHOUSE_LOGIN: YWRtaW4=
+  CLICKHOUSE_PASSWORD: YWRtaW4=

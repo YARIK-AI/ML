@@ -158,18 +158,40 @@ spec:
         - name : airflow
           resources:
             requests:
-              memory: "1Gi"
+              memory: "2Gi"
               cpu: 1
             limits:
-              memory: "1Gi"
+              memory: "2Gi"
               cpu: 1
           image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
           env:
-          - name: AWS_ACCESS_KEY_ID
-            value: adminminio
-          - name: AWS_SECRET_ACCESS_KEY
-            value: adminminio       
+            - name: IMAGE_NAME_PYSPARK
+              value: aggrik/pyspark:latest
+            - name: AWS_ENDPOINT_URL
+              value: http://minio:9000   
+            - name: MLFLOW_URL
+              value: http://mlflow:5000/
+            - name: MLFLOW_S3_ENDPOINT_URL
+              value: http://minio:9000
+            - name: GREENPLUM_HOST
+              value: greenplum
+            - name: GREENPLUM_SCHEMA
+              value: ml
+            - name: GREENPLUM_PORT
+              value: "5432"
+            - name: GREENPLUM_DATABASE
+              value: sdl
+            - name: TARANTOOL_HOST
+              value: tarantool
+            - name: TARANTOOL_PORT
+              value: "3301"
+            - name: CLICKHOUSE_HOST
+              value: clickhouse
+            - name: CLICKHOUSE_PORT
+              value: "8123"
+            - name: CLICKHOUSE_DATABASE
+              value: sdl
           command:
           - bash
           - -c
