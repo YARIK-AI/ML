@@ -31,14 +31,16 @@ schemaIndex = StructType([ \
 
 # увеличиваем набор данных
 batchSize = 30
-labelSize = 10
+labelCount = 10
+feature1Count = 10 
+
 def writeParquet():
     indx = list((idx,idx) for idx in range(batchSize))
     df = spark.createDataFrame(indx, schemaIndex)
     def extract_features(row):
         return (
-            'label'+str(random.randint(1, labelSize)), #label
-            random.randint(1, N), #feature1
+            'label'+str(random.randint(1, labelCount)), #label
+            random.randint(1, feature1Count), #feature1
             random.random(), #feature2
             bool(random.getrandbits(1)) , #feature3
         )
