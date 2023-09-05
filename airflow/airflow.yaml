@@ -155,7 +155,11 @@ spec:
             - name: IMAGE_NAME_PYSPARK
               value: aggrik/pyspark:latest
             - name: AWS_ENDPOINT_URL
-              value: http://minio:9000   
+              value: http://minio:9000
+            - name: AWS_ACCESS_KEY_ID
+              value: adminminio
+            - name: AWS_SECRET_ACCESS_KEY
+              value: adminminio
             - name: MLFLOW_URL
               value: http://mlflow:5000/
             - name: MLFLOW_S3_ENDPOINT_URL
