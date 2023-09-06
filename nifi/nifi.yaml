@@ -46,7 +46,13 @@ spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
         - name : nifi
-          resources: {}
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: 2
+            limits:
+              memory: "1Gi"
+              cpu: 2
           image : aggrik/nifi:latest
           imagePullPolicy : IfNotPresent
           command: 
