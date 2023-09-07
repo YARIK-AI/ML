@@ -67,6 +67,8 @@ spec:
             value: admin
           - name: CLICKHOUSE_PASSWORD
             value: admin
+          - name: KAFKA_SERVERS
+            value: broker1:9092,broker2:9092,broker3:9092
           command:
           - bash
           - -c

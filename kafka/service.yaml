@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    env: base
+    owner: user
+    project: base
+  name: broker1-remote
+spec:
+  ports:
+  - name: broker1-remote
+    nodePort: 32041
+    port: 3333
+    protocol: TCP
+    targetPort: 9092
+  selector:
+    app: kafkabroker1
+    project: base
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    env: base
+    owner: user
+    project: base
+  name: broker2-remote
+spec:
+  ports:
+  - name: broker2-remote
+    nodePort: 32042
+    port: 3333
+    protocol: TCP
+    targetPort: 9092
+  selector:
+    app: kafkabroker2
+    project: base
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    env: base
+    owner: user
+    project: base
+  name: broker3-remote
+spec:
+  ports:
+  - name: broker3-remote
+    nodePort: 32043
+    port: 3333
+    protocol: TCP
+    targetPort: 9092
+  selector:
+    app: kafkabroker3
+    project: base
+  type: NodePort

@@ -96,7 +96,7 @@ data:
     # Hostname and port the broker will advertise to producers and consumers. If not set,
     # it uses the value for "listeners" if configured.  Otherwise, it will use the value
     # returned from java.net.InetAddress.getCanonicalHostName().
-    advertised.listeners=PLAINTEXT://brokerhostname:9092
+    advertised.listeners=PLAINTEXT://advname:9092
 
     # Maps listener names to security protocols, the default is for them to be the same. See the config documentation for more details
     #listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL,SASL_PLAINTEXT:SASL_PLAINTEXT,SASL_SSL:SASL_SSL
@@ -324,6 +324,7 @@ data:
     cp /bin/server.properties /opt/kafka/props/server.properties
     cp /bin/log4j.properties /opt/kafka/config/log4j.properties
     sed -i 's/brokerhostname/broker1/g' /opt/kafka/props/server.properties
+    sed -i 's/advname:9092/kubernetes.docker.internal:32041/g' /opt/kafka/props/server.properties
     sed -i 's/broker.id=1/broker.id=1/g' /opt/kafka/props/server.properties
     bin/kafka-server-start.sh /opt/kafka/props/server.properties
 kind: ConfigMap
@@ -337,6 +338,7 @@ data:
     cp /bin/server.properties /opt/kafka/props/server.properties
     cp /bin/log4j.properties /opt/kafka/config/log4j.properties
     sed -i 's/brokerhostname/broker2/g' /opt/kafka/props/server.properties
+    sed -i 's/advname:9092/kubernetes.docker.internal:32042/g' /opt/kafka/props/server.properties
     sed -i 's/broker.id=1/broker.id=2/g' /opt/kafka/props/server.properties
     bin/kafka-server-start.sh /opt/kafka/props/server.properties
 kind: ConfigMap
@@ -350,6 +352,7 @@ data:
     cp /bin/server.properties /opt/kafka/props/server.properties
     cp /bin/log4j.properties /opt/kafka/config/log4j.properties
     sed -i 's/brokerhostname/broker3/g' /opt/kafka/props/server.properties
+    sed -i 's/advname:9092/kubernetes.docker.internal:32043/g' /opt/kafka/props/server.properties
     sed -i 's/broker.id=1/broker.id=3/g' /opt/kafka/props/server.properties
     bin/kafka-server-start.sh /opt/kafka/props/server.properties
 kind: ConfigMap
