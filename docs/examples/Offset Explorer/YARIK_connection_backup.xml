@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<connections>
+<connection bootstrap_servers="kubernetes.docker.internal:32041,kubernetes.docker.internal:32042,kubernetes.docker.internal:32043" broker_security_type="PLAINTEXT" chroot="/" group="Clusters" groupId="1" host="localhost" jaas_config="" keystore_location="" keystore_password="" keystore_privatekey="" name="YARIK" port="2181" sasl_mechanism="" schema_registry_basic_auth="" schema_registry_endpoint="" schema_registry_ssl_keystore_location="" schema_registry_ssl_keystore_password="" schema_registry_ssl_keystore_private_key="" schema_registry_ssl_truststore_location="" schema_registry_ssl_truststore_password="" truststore_location="" truststore_password="" version="VERSION_3_2_0"/>
+<groups>
+<group id="1" name="Clusters"/>
+</groups>
+</connections>
