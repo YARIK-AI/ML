@@ -5,26 +5,27 @@ metadata:
 data:
   run.sh: |-
     #!/bin/bash
-    /opt/nifi-registry/bin/nifi-registry.sh start
-    /opt/nifi/bin/nifi.sh start
-    N_ATTEMPTS=0
-    # Initial start-up can take a while...
-    MAX_ATTEMPTS=100
-    URL=localhost:8090/nifi/
-    echo $URL
-    until $(curl --output /dev/null --head --silent --fail -L  http://$URL); do
-        if [ ${N_ATTEMPTS} -eq ${MAX_ATTEMPTS} ]
-        then
-          echo "Maximum number of attempts reached, exiting." >&2
-          exit 1
-        fi
-
-        echo "Could not reach $URL, trying again... (attempt number ${N_ATTEMPTS})"
-        N_ATTEMPTS=$(( $N_ATTEMPTS + 1 ))
-        sleep 5
-    done
-    /opt/nifi-toolkit/bin/cli.sh nifi create-reg-client -rcn registry -rcu http://localhost:18080 -u http://localhost:8090
-    tail -fq /opt/nifi/logs/nifi-app.log /opt/nifi/logs/nifi-bootstrap.log /opt/nifi/logs/nifi-user.log
+    /opt/nifi/bin/nifi.sh run
+    #    /opt/nifi-registry/bin/nifi-registry.sh start
+    #    /opt/nifi/bin/nifi.sh start
+    #    N_ATTEMPTS=0
+    #    # Initial start-up can take a while...
+    #    MAX_ATTEMPTS=100
+    #    URL=localhost:8090/nifi/
+    #    echo $URL
+    #    until $(curl --output /dev/null --head --silent --fail -L  http://$URL); do
+    #        if [ ${N_ATTEMPTS} -eq ${MAX_ATTEMPTS} ]
+    #        then
+    #          echo "Maximum number of attempts reached, exiting." >&2
+    #          exit 1
+    #        fi
+    #
+    #        echo "Could not reach $URL, trying again... (attempt number ${N_ATTEMPTS})"
+    #        N_ATTEMPTS=$(( $N_ATTEMPTS + 1 ))
+    #        sleep 5
+    #    done
+    #    /opt/nifi-toolkit/bin/cli.sh nifi create-reg-client -rcn registry -rcu http://localhost:18080 -u http://localhost:8090
+    #    tail -fq /opt/nifi/logs/nifi-app.log /opt/nifi/logs/nifi-bootstrap.log /opt/nifi/logs/nifi-user.log
 ---
 apiVersion : apps/v1
 kind : Deployment
