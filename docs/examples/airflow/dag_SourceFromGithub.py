@@ -41,7 +41,7 @@ with DAG(
       image=os.environ['IMAGE_NAME_PYSPARK'],
       # --- команда внутри контейнера ---
       cmds=["/bin/bash", "-c"],
-      arguments=[f"""wget {header} -O {fileName} -q {gitFileUrl} \
+      arguments=[f"""wget --no-check-certificate {header} -O {fileName} -q {gitFileUrl} \
                  && python {fileName}
                  """],
       image_pull_policy="IfNotPresent",
