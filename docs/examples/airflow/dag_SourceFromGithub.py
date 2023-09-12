@@ -8,7 +8,7 @@ import os
 
 ## Вариант без авторизации
 fileName = 'df_show.py'
-gitFileUrl = 'https://raw.githubusercontent.com/YARIK-AI/ML/main/docs/examples/pyspark/'+ fileName
+gitFileUrl = f'https://raw.githubusercontent.com/YARIK-AI/ML/main/docs/examples/pyspark/'+ fileName
 header = ""
 
 ## Вариант с авторизацией
