@@ -21,7 +21,7 @@ header = ""
 #token = 'ghp_xТОКЕН' 
 #fileName = '<имя файла>.py'
 #gitFileUrl = 'https://raw.githubusercontent.com/<организация>/<проект>/master/<путь до файла>/'+ fileName
-#header = " --header 'Authorization: token {token}' "
+#header = f" --header 'Authorization: token {token}' "
 
 with DAG(
     dag_id="get_file",
