@@ -1,14 +1,14 @@
 import airflow
 from airflow import DAG
 from pendulum import datetime
-from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
+from airflow.operators.bash_operator import BashOperator
 from airflow import configuration as conf
 from airflow.utils.dates import days_ago
 import os
 
 ## Вариант без авторизации
-fileName = 'df_show.py'
-gitFileUrl = f'https://raw.githubusercontent.com/YARIK-AI/ML/main/docs/examples/pyspark/'+ fileName
+fileName = 'dag_EmptyOperator.py'
+gitFileUrl = f'https://raw.githubusercontent.com/YARIK-AI/ML/main/docs/examples/airflow/'+ fileName
 header = ""
 
 ## Вариант с авторизацией
@@ -24,33 +24,20 @@ header = ""
 #header = f" --header 'Authorization: token {token}' "
 
 with DAG(
-    dag_id="example_SourceFromGithub",
+    dag_id="example_BashOperator",
     schedule_interval=None,
     is_paused_upon_creation=True,
     start_date=  airflow.utils.dates.days_ago(0),
     catchup=False,
     max_active_runs=1,
-) as dag: 
+) as dag:
 
   namespace = conf.get('kubernetes', 'NAMESPACE')    
 
-  runPython = KubernetesPodOperator(
-      task_id="task_id_python",
-      name="task_name_python",
-      namespace=namespace,
-      image=os.environ['IMAGE_NAME_PYSPARK'],
-      # --- команда внутри контейнера ---
-      cmds=["/bin/bash", "-c"],
-      arguments=[f"""wget --no-check-certificate {header} -O {fileName} -q {gitFileUrl} \
-                 && python {fileName}
-                 """],
-      image_pull_policy="IfNotPresent",
-      # ------
-      labels={"app": "app1"},
-      startup_timeout_seconds=240,
-      get_logs=True,
-      random_name_suffix=False,
-      is_delete_operator_pod=True)
+  cmd = BashOperator(
+    task_id='task_id',
+    bash_command=f"wget --no-check-certificate {header} -O {os.environ.get('AIRFLOW__CORE__DAGS_FOLDER')+'/'+fileName} -q {gitFileUrl}"
+  )
 
 if __name__ == "__main__":
     dag.test()

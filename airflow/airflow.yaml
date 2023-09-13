@@ -91,9 +91,7 @@ metadata:
 data:
   run.sh: |-
     #!/bin/bash
-    aws s3 cp s3://programs/dags.tar.gz dags.tar.gz --endpoint-url http://minio:9000/ 
-    tar zxvf dags.tar.gz
-    cp -R dags /root/airflow
+    mkdir -p $AIRFLOW__CORE__DAGS_FOLDER
     airflow standalone
 ---
 apiVersion: v1
@@ -152,6 +150,8 @@ spec:
           image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
           env:
+            - name: AIRFLOW__CORE__DAGS_FOLDER
+              value: /root/airflow/dags
             - name: IMAGE_NAME_PYSPARK
               value: aggrik/pyspark:latest
             - name: AWS_ENDPOINT_URL

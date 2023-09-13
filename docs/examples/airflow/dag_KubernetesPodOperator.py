@@ -7,7 +7,7 @@ from airflow.utils.dates import days_ago
 import os
 
 with DAG(
-    dag_id="simple_KubernetesPodOperator",
+    dag_id="example_KubernetesPodOperator",
     schedule_interval=None,
     is_paused_upon_creation=True,
     start_date=  airflow.utils.dates.days_ago(0),
