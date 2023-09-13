@@ -150,6 +150,8 @@ spec:
           image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
           env:
+            - name: PYTHONWARNINGS
+              value: ignore::DeprecationWarning,ignore::FutureWarning
             - name: AIRFLOW__CORE__DAGS_FOLDER
               value: /root/airflow/dags
             - name: IMAGE_NAME_PYSPARK

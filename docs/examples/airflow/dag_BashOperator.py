@@ -1,3 +1,8 @@
+# В этом примере выполняется задача Airflow с использованием BashOpertor
+# В задаче скачивается пример dag для airflow из github и устанавливается в airflow
+# после успешного выполнения, будет доступна ссылка на dag, адрес http://localhost:32088/dags/example_EmptyOperator
+# airflow требуется некоторое время на обновление списка задач (несколько минут)
+
 import airflow
 from airflow import DAG
 from pendulum import datetime
