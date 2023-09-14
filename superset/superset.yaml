@@ -33,7 +33,7 @@ spec:
               name: superset-envs
           image : aggrik/superset:latest
           imagePullPolicy: IfNotPresent
-          command: ["bash", "-c", "/app/docker/docker-init.sh"]
+          command: ["bash", "-c", "/app/docker/docker-init.sh && superset import_datasources -p /app/datasources/greenplum.yaml"]
           volumeMounts:
             - mountPath: /app/docker
               name: configmap-superset-config
@@ -41,8 +41,11 @@ spec:
               mountPath: /app/pythonpath/superset_config.py
               readOnly: false
               subPath: superset_config.py
+            - mountPath: /app/datasources
+              name: greenplum-connect
       containers:
         - name : superset
+          resources: {}
           envFrom:
           - configMapRef:
               name: superset-envs
@@ -57,8 +60,6 @@ spec:
               mountPath: /app/pythonpath/superset_config.py
               readOnly: false
               subPath: superset_config.py
-            - mountPath: /app/datasources
-              name: greenplum-connect
       volumes:
        - name: configmap-superset-server-prop
          configMap:
