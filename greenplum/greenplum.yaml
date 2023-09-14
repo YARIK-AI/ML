@@ -53,6 +53,7 @@ data:
     source /usr/local/greenplum-db/greenplum_path.sh
     sh /home/gpadmin/start.sh
     psql -d postgres -c "alter user gpadmin password 'gpadmin'"
+    psql -d postgres -c "create  database sdl"    
 ---
 apiVersion : apps/v1
 kind : Deployment

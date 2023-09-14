@@ -1,3 +1,14 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: greenplum-connect
+data:
+  greenplum.yaml: |-
+    databases:
+    - database_name: greenplum
+      sqlalchemy_uri: postgresql+psycopg2://gpadmin:gpadmin@greenplum:5432/sdl
+---
 apiVersion : apps/v1
 kind : Deployment
 metadata:
@@ -41,11 +52,13 @@ spec:
           #command: ["bash", "-c", "tail -f"]
           volumeMounts:
             - mountPath: /app/docker
-              name: configmap-superset-config
+              name: configmap-superset-config              
             - name: configmap-superset-server-prop
               mountPath: /app/pythonpath/superset_config.py
               readOnly: false
               subPath: superset_config.py
+            - mountPath: /app/datasources
+              name: greenplum-connect
       volumes:
        - name: configmap-superset-server-prop
          configMap:
@@ -55,3 +68,7 @@ spec:
          configMap:
            defaultMode: 0775
            name: config-superset
+       - name: greenplum-connect
+         configMap:
+           defaultMode: 0777
+           name: greenplum-connect          
