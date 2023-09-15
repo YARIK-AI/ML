@@ -2,12 +2,14 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: greenplum-connect
+  name: connects
 data:
-  greenplum.yaml: |-
+  connects.yaml: |-
     databases:
     - database_name: greenplum
       sqlalchemy_uri: postgresql+psycopg2://gpadmin:gpadmin@greenplum:5432/sdl
+    - database_name: clickhouse
+      sqlalchemy_uri: clickhousedb+connect://admin:admin@clickhouse:8123
 ---
 apiVersion : apps/v1
 kind : Deployment
@@ -33,7 +35,8 @@ spec:
               name: superset-envs
           image : aggrik/superset:latest
           imagePullPolicy: IfNotPresent
-          command: ["bash", "-c", "/app/docker/docker-init.sh && superset import_datasources -p /app/datasources/greenplum.yaml"]
+          command: ["bash", "-c", "/app/docker/docker-init.sh \
+            && superset import_datasources -p /app/datasources/connects.yaml "]
           volumeMounts:
             - mountPath: /app/docker
               name: configmap-superset-config
@@ -42,7 +45,7 @@ spec:
               readOnly: false
               subPath: superset_config.py
             - mountPath: /app/datasources
-              name: greenplum-connect
+              name: connects
       containers:
         - name : superset
           resources: {}
@@ -69,7 +72,7 @@ spec:
          configMap:
            defaultMode: 0775
            name: config-superset
-       - name: greenplum-connect
+       - name: connects
          configMap:
            defaultMode: 0777
-           name: greenplum-connect          
+           name: connects
