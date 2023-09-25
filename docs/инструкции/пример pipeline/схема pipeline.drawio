@@ -1,0 +1,120 @@
+<mxfile host="Electron" modified="2023-09-25T07:24:14.619Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.7.5 Chrome/114.0.5735.289 Electron/25.8.1 Safari/537.36" etag="rnXem_iijC2kRygJSAUg" version="21.7.5" type="device">
+  <diagram name="Страница — 1" id="ls6M6Z_WGR-Nae2kfcRv">
+    <mxGraphModel dx="1687" dy="1811" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-38" value="airflow dag train" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="-620" width="1120" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-37" value="airflow dag predict" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="-70" width="1130" height="460" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-7" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-1" target="OErSnr2YWaw7KPixAgOZ-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-1" value="входные данные для обучения&lt;br&gt;файл в формате parquet&lt;br&gt;на S3" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="38" y="-410" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-8" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-3" target="OErSnr2YWaw7KPixAgOZ-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-3" value="обработка данных" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="290" y="-410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-9" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-4" target="OErSnr2YWaw7KPixAgOZ-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.443;entryY=0.921;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-4" target="OErSnr2YWaw7KPixAgOZ-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-4" value="таблица(ы)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="462" y="-430" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-5" value="витрина данных" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="448" y="-545" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-13" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-6" target="OErSnr2YWaw7KPixAgOZ-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-6" value="тренировка данных" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="581" y="-410" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0;exitDx=70;exitDy=80;exitPerimeter=0;entryX=0.417;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-12" target="OErSnr2YWaw7KPixAgOZ-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-12" value="модель в mlflow" style="shape=cube;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;darkOpacity=0.05;darkOpacity2=0.1;" vertex="1" parent="1">
+          <mxGeometry x="742" y="-420" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-15" target="OErSnr2YWaw7KPixAgOZ-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-15" value="входные данные для предсказания&lt;br&gt;файл в формате parquet&lt;br&gt;на S3" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="25" y="1" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-18" target="OErSnr2YWaw7KPixAgOZ-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-18" value="обработка данных" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="285" y="1" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.549;entryY=0.006;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-20" target="OErSnr2YWaw7KPixAgOZ-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-27" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-20" target="OErSnr2YWaw7KPixAgOZ-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-20" value="таблица(ы)" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="465" y="-19" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-21" value="витрина данных" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="440" y="171" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-24" target="OErSnr2YWaw7KPixAgOZ-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-36" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-24" target="OErSnr2YWaw7KPixAgOZ-32">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-24" value="предсказание" style="shape=process;whiteSpace=wrap;html=1;backgroundOutline=1;" vertex="1" parent="1">
+          <mxGeometry x="761" y="1" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-28" value="выходные данные предсказания&lt;br&gt;файл(ы) в формате parquet&lt;br&gt;на S3" style="shape=parallelogram;perimeter=parallelogramPerimeter;whiteSpace=wrap;html=1;fixedSize=1;" vertex="1" parent="1">
+          <mxGeometry x="907" y="1" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-31" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.549;entryY=0.006;entryDx=0;entryDy=0;entryPerimeter=0;strokeWidth=5;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-32" target="OErSnr2YWaw7KPixAgOZ-33">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-32" value="таблица(ы)&lt;br&gt;для витрины" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;" vertex="1" parent="1">
+          <mxGeometry x="781" y="107" width="80" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-33" value="витрина данных" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">
+          <mxGeometry x="755" y="258" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-40" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-39" target="OErSnr2YWaw7KPixAgOZ-3">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="533" y="-136" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="490" y="-280" />
+              <mxPoint x="368" y="-280" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=0;exitDx=0;exitDy=0;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-39" target="OErSnr2YWaw7KPixAgOZ-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="563" y="-136" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-39" target="OErSnr2YWaw7KPixAgOZ-18">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-43" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.142;entryY=-0.033;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="OErSnr2YWaw7KPixAgOZ-39" target="OErSnr2YWaw7KPixAgOZ-24">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="OErSnr2YWaw7KPixAgOZ-39" value="github&lt;br&gt;размещение исходного кода" style="whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="460" y="-206" width="120" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
