@@ -1,0 +1,365 @@
+apiVersion: v1
+binaryData:
+  docker-bootstrap.sh: |
+    IyEvdXNyL2Jpbi9lbnYgYmFzaAojCiMgTGljZW5zZWQgdG8gdGhlIEFwYWNoZSBTb2Z0d2
+    FyZSBGb3VuZGF0aW9uIChBU0YpIHVuZGVyIG9uZSBvciBtb3JlCiMgY29udHJpYnV0b3Ig
+    bGljZW5zZSBhZ3JlZW1lbnRzLiAgU2VlIHRoZSBOT1RJQ0UgZmlsZSBkaXN0cmlidXRlZC
+    B3aXRoCiMgdGhpcyB3b3JrIGZvciBhZGRpdGlvbmFsIGluZm9ybWF0aW9uIHJlZ2FyZGlu
+    ZyBjb3B5cmlnaHQgb3duZXJzaGlwLgojIFRoZSBBU0YgbGljZW5zZXMgdGhpcyBmaWxlIH
+    RvIFlvdSB1bmRlciB0aGUgQXBhY2hlIExpY2Vuc2UsIFZlcnNpb24gMi4wCiMgKHRoZSAi
+    TGljZW5zZSIpOyB5b3UgbWF5IG5vdCB1c2UgdGhpcyBmaWxlIGV4Y2VwdCBpbiBjb21wbG
+    lhbmNlIHdpdGgKIyB0aGUgTGljZW5zZS4gIFlvdSBtYXkgb2J0YWluIGEgY29weSBvZiB0
+    aGUgTGljZW5zZSBhdAojCiMgICAgaHR0cDovL3d3dy5hcGFjaGUub3JnL2xpY2Vuc2VzL0
+    xJQ0VOU0UtMi4wCiMKIyBVbmxlc3MgcmVxdWlyZWQgYnkgYXBwbGljYWJsZSBsYXcgb3Ig
+    YWdyZWVkIHRvIGluIHdyaXRpbmcsIHNvZnR3YXJlCiMgZGlzdHJpYnV0ZWQgdW5kZXIgdG
+    hlIExpY2Vuc2UgaXMgZGlzdHJpYnV0ZWQgb24gYW4gIkFTIElTIiBCQVNJUywKIyBXSVRI
+    T1VUIFdBUlJBTlRJRVMgT1IgQ09ORElUSU9OUyBPRiBBTlkgS0lORCwgZWl0aGVyIGV4cH
+    Jlc3Mgb3IgaW1wbGllZC4KIyBTZWUgdGhlIExpY2Vuc2UgZm9yIHRoZSBzcGVjaWZpYyBs
+    YW5ndWFnZSBnb3Zlcm5pbmcgcGVybWlzc2lvbnMgYW5kCiMgbGltaXRhdGlvbnMgdW5kZX
+    IgdGhlIExpY2Vuc2UuCiMKCnNldCAtZW8gcGlwZWZhaWwKClJFUVVJUkVNRU5UU19MT0NB
+    TD0iL2FwcC9kb2NrZXIvcmVxdWlyZW1lbnRzLWxvY2FsLnR4dCIKIyBJZiBDeXByZXNzIH
+    J1biCWIG92ZXJ3cml0ZSB0aGUgcGFzc3dvcmQgZm9yIGFkbWluIGFuZCBleHBvcnQgZW52
+    IHZhcmlhYmxlcwppZiBbICIkQ1lQUkVTU19DT05GSUciID09ICJ0cnVlIiBdOyB0aGVuCi
+    AgICBleHBvcnQgU1VQRVJTRVRfQ09ORklHPXRlc3RzLmludGVncmF0aW9uX3Rlc3RzLnN1
+    cGVyc2V0X3Rlc3RfY29uZmlnCiAgICBleHBvcnQgU1VQRVJTRVRfVEVTVEVOVj10cnVlCi
+    AgICBleHBvcnQgU1VQRVJTRVRfX1NRTEFMQ0hFTVlfREFUQUJBU0VfVVJJPXBvc3RncmVz
+    cWwrcHN5Y29wZzI6Ly9zdXBlcnNldDpzdXBlcnNldEBkYjo1NDMyL3N1cGVyc2V0CmZpCi
+    MKIyBNYWtlIHN1cmUgd2UgaGF2ZSBkZXYgcmVxdWlyZW1lbnRzIGluc3RhbGxlZAojCmlm
+    IFsgLWYgIiR7UkVRVUlSRU1FTlRTX0xPQ0FMfSIgXTsgdGhlbgogIGVjaG8gIkluc3RhbG
+    xpbmcgbG9jYWwgb3ZlcnJpZGVzIGF0ICR7UkVRVUlSRU1FTlRTX0xPQ0FMfSIKICBwaXAg
+    aW5zdGFsbCAtciAiJHtSRVFVSVJFTUVOVFNfTE9DQUx9IgplbHNlCiAgZWNobyAiU2tpcH
+    BpbmcgbG9jYWwgb3ZlcnJpZGVzIgpmaQoKaWYgW1sgIiR7MX0iID09ICJ3b3JrZXIiIF1d
+    OyB0aGVuCiAgZWNobyAiU3RhcnRpbmcgQ2VsZXJ5IHdvcmtlci4uLiIKICBjZWxlcnkgLS
+    1hcHA9c3VwZXJzZXQudGFza3MuY2VsZXJ5X2FwcDphcHAgd29ya2VyIC1PZmFpciAtbCBJ
+    TkZPCmVsaWYgW1sgIiR7MX0iID09ICJiZWF0IiBdXTsgdGhlbgogIGVjaG8gIlN0YXJ0aW
+    5nIENlbGVyeSBiZWF0Li4uIgogIGNlbGVyeSAtLWFwcD1zdXBlcnNldC50YXNrcy5jZWxl
+    cnlfYXBwOmFwcCBiZWF0IC0tcGlkZmlsZSAvdG1wL2NlbGVyeWJlYXQucGlkIC1sIElORk
+    8gLXMgIiR7U1VQRVJTRVRfSE9NRX0iL2NlbGVyeWJlYXQtc2NoZWR1bGUKZWxpZiBbWyAi
+    JHsxfSIgPT0gImFwcCIgXV07IHRoZW4KICBlY2hvICJTdGFydGluZyB3ZWIgYXBwLi4uIg
+    ogIGZsYXNrIHJ1biAtcCA4MDg4IC0td2l0aC10aHJlYWRzIC0tcmVsb2FkIC0tZGVidWdn
+    ZXIgLS1ob3N0PTAuMC4wLjAKZWxpZiBbWyAiJHsxfSIgPT0gImFwcC1ndW5pY29ybiIgXV
+    07IHRoZW4KICBlY2hvICJTdGFydGluZyB3ZWIgYXBwLi4uIgogIC91c3IvYmluL3J1bi1z
+    ZXJ2ZXIuc2gKZmkK
+  docker-init.sh: |
+    IyEvdXNyL2Jpbi9lbnYgYmFzaAojCiMgTGljZW5zZWQgdG8gdGhlIEFwYWNoZSBTb2Z0d2
+    FyZSBGb3VuZGF0aW9uIChBU0YpIHVuZGVyIG9uZSBvciBtb3JlCiMgY29udHJpYnV0b3Ig
+    bGljZW5zZSBhZ3JlZW1lbnRzLiAgU2VlIHRoZSBOT1RJQ0UgZmlsZSBkaXN0cmlidXRlZC
+    B3aXRoCiMgdGhpcyB3b3JrIGZvciBhZGRpdGlvbmFsIGluZm9ybWF0aW9uIHJlZ2FyZGlu
+    ZyBjb3B5cmlnaHQgb3duZXJzaGlwLgojIFRoZSBBU0YgbGljZW5zZXMgdGhpcyBmaWxlIH
+    RvIFlvdSB1bmRlciB0aGUgQXBhY2hlIExpY2Vuc2UsIFZlcnNpb24gMi4wCiMgKHRoZSAi
+    TGljZW5zZSIpOyB5b3UgbWF5IG5vdCB1c2UgdGhpcyBmaWxlIGV4Y2VwdCBpbiBjb21wbG
+    lhbmNlIHdpdGgKIyB0aGUgTGljZW5zZS4gIFlvdSBtYXkgb2J0YWluIGEgY29weSBvZiB0
+    aGUgTGljZW5zZSBhdAojCiMgICAgaHR0cDovL3d3dy5hcGFjaGUub3JnL2xpY2Vuc2VzL0
+    xJQ0VOU0UtMi4wCiMKIyBVbmxlc3MgcmVxdWlyZWQgYnkgYXBwbGljYWJsZSBsYXcgb3Ig
+    YWdyZWVkIHRvIGluIHdyaXRpbmcsIHNvZnR3YXJlCiMgZGlzdHJpYnV0ZWQgdW5kZXIgdG
+    hlIExpY2Vuc2UgaXMgZGlzdHJpYnV0ZWQgb24gYW4gIkFTIElTIiBCQVNJUywKIyBXSVRI
+    T1VUIFdBUlJBTlRJRVMgT1IgQ09ORElUSU9OUyBPRiBBTlkgS0lORCwgZWl0aGVyIGV4cH
+    Jlc3Mgb3IgaW1wbGllZC4KIyBTZWUgdGhlIExpY2Vuc2UgZm9yIHRoZSBzcGVjaWZpYyBs
+    YW5ndWFnZSBnb3Zlcm5pbmcgcGVybWlzc2lvbnMgYW5kCiMgbGltaXRhdGlvbnMgdW5kZX
+    IgdGhlIExpY2Vuc2UuCiMKc2V0IC1lCgojCiMgQWx3YXlzIGluc3RhbGwgbG9jYWwgb3Zl
+    cnJpZGVzIGZpcnN0CiMKL2FwcC9kb2NrZXIvZG9ja2VyLWJvb3RzdHJhcC5zaAoKU1RFUF
+    9DTlQ9NAoKZWNob19zdGVwKCkgewpjYXQgPDxFT0YKCiMjIyMjIyMjIyMjIyMjIyMjIyMj
+    IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKCg
+    pJbml0IFN0ZXAgJHsxfS8ke1NURVBfQ05UfSBbJHsyfV0gLS0gJHszfQoKCiMjIyMjIyMj
+    IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIy
+    MjIyMjIyMjIyMKCkVPRgp9CkFETUlOX1BBU1NXT1JEPSJhZG1pbiIKIyBJZiBDeXByZXNz
+    IHJ1biCWIG92ZXJ3cml0ZSB0aGUgcGFzc3dvcmQgZm9yIGFkbWluIGFuZCBleHBvcnQgZW
+    52IHZhcmlhYmxlcwppZiBbICIkQ1lQUkVTU19DT05GSUciID09ICJ0cnVlIiBdOyB0aGVu
+    CiAgICBBRE1JTl9QQVNTV09SRD0iZ2VuZXJhbCIKICAgIGV4cG9ydCBTVVBFUlNFVF9DT0
+    5GSUc9dGVzdHMuaW50ZWdyYXRpb25fdGVzdHMuc3VwZXJzZXRfdGVzdF9jb25maWcKICAg
+    IGV4cG9ydCBTVVBFUlNFVF9URVNURU5WPXRydWUKICAgIGV4cG9ydCBTVVBFUlNFVF9fU1
+    FMQUxDSEVNWV9EQVRBQkFTRV9VUkk9cG9zdGdyZXNxbCtwc3ljb3BnMjovL3N1cGVyc2V0
+    OnN1cGVyc2V0QGRieDo1NDMyL3N1cGVyc2V0CmZpCiMgSW5pdGlhbGl6ZSB0aGUgZGF0YW
+    Jhc2UKZWNob19zdGVwICIxIiAiU3RhcnRpbmciICJBcHBseWluZyBEQiBtaWdyYXRpb25z
+    IgpzdXBlcnNldCBkYiB1cGdyYWRlCmVjaG9fc3RlcCAiMSIgIkNvbXBsZXRlIiAiQXBwbH
+    lpbmcgREIgbWlncmF0aW9ucyIKCiMgQ3JlYXRlIGFuIGFkbWluIHVzZXIKZWNob19zdGVw
+    ICIyIiAiU3RhcnRpbmciICJTZXR0aW5nIHVwIGFkbWluIHVzZXIgKCBhZG1pbiAvICRBRE
+    1JTl9QQVNTV09SRCApIgpzdXBlcnNldCBmYWIgY3JlYXRlLWFkbWluIFwKICAgICAgICAg
+    ICAgICAtLXVzZXJuYW1lIGFkbWluIFwKICAgICAgICAgICAgICAtLWZpcnN0bmFtZSBTdX
+    BlcnNldCBcCiAgICAgICAgICAgICAgLS1sYXN0bmFtZSBBZG1pbiBcCiAgICAgICAgICAg
+    ICAgLS1lbWFpbCBhZG1pbkBzdXBlcnNldC5jb20gXAogICAgICAgICAgICAgIC0tcGFzc3
+    dvcmQgJEFETUlOX1BBU1NXT1JECmVjaG9fc3RlcCAiMiIgIkNvbXBsZXRlIiAiU2V0dGlu
+    ZyB1cCBhZG1pbiB1c2VyIgojIENyZWF0ZSBkZWZhdWx0IHJvbGVzIGFuZCBwZXJtaXNzaW
+    9ucwplY2hvX3N0ZXAgIjMiICJTdGFydGluZyIgIlNldHRpbmcgdXAgcm9sZXMgYW5kIHBl
+    cm1zIgpzdXBlcnNldCBpbml0CmVjaG9fc3RlcCAiMyIgIkNvbXBsZXRlIiAiU2V0dGluZy
+    B1cCByb2xlcyBhbmQgcGVybXMiCgppZiBbICIkU1VQRVJTRVRfTE9BRF9FWEFNUExFUyIg
+    PSAieWVzIiBdOyB0aGVuCiAgICAjIExvYWQgc29tZSBkYXRhIHRvIHBsYXkgd2l0aAogIC
+    AgZWNob19zdGVwICI0IiAiU3RhcnRpbmciICJMb2FkaW5nIGV4YW1wbGVzIgogICAgIyBJ
+    ZiBDeXByZXNzIHJ1biB3aGljaCBjb25zdW1lcyBzdXBlcnNldF90ZXN0X2NvbmZpZyCWIG
+    xvYWQgcmVxdWlyZWQgZGF0YSBmb3IgdGVzdHMKICAgIGlmIFsgIiRDWVBSRVNTX0NPTkZJ
+    RyIgPT0gInRydWUiIF07IHRoZW4KICAgICAgICBzdXBlcnNldCBsb2FkX3Rlc3RfdXNlcn
+    MKICAgICAgICBzdXBlcnNldCBsb2FkX2V4YW1wbGVzIC0tbG9hZC10ZXN0LWRhdGEKICAg
+    IGVsc2UKICAgICAgICBzdXBlcnNldCBsb2FkX2V4YW1wbGVzCiAgICBmaQogICAgZWNob1
+    9zdGVwICI0IiAiQ29tcGxldGUiICJMb2FkaW5nIGV4YW1wbGVzIgpmaQo=
+data:
+  config.py: |
+    # Licensed to the Apache Software Foundation (ASF) under one
+    # or more contributor license agreements.  See the NOTICE file
+    # distributed with this work for additional information
+    # regarding copyright ownership.  The ASF licenses this file
+    # to you under the Apache License, Version 2.0 (the
+    # "License"); you may not use this file except in compliance
+    # with the License.  You may obtain a copy of the License at
+    #
+    #   http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing,
+    # software distributed under the License is distributed on an
+    # "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    # KIND, either express or implied.  See the License for the
+    # specific language governing permissions and limitations
+    # under the License.
+    #
+    # This file is included in the final Docker image and SHOULD be overridden when
+    # deploying the image to prod. Settings configured here are intended for use in local
+    # development environments. Also note that superset_config_docker.py is imported
+    # as a final step as a means to override "defaults" configured here
+    #
+    import logging
+    import os
+    from datetime import timedelta
+    from typing import Optional
+
+    from cachelib.file import FileSystemCache
+    from celery.schedules import crontab
+
+    logger = logging.getLogger()
+
+
+    def get_env_variable(var_name: str, default: Optional[str] = None) -> str:
+        """Get the environment variable or raise exception."""
+        try:
+            return os.environ[var_name]
+        except KeyError:
+            if default is not None:
+                return default
+            else:
+                error_msg = "The environment variable {} was missing, abort...".format(
+                    var_name
+                )
+                raise EnvironmentError(error_msg)
+
+
+    DATABASE_DIALECT = get_env_variable("DATABASE_DIALECT")
+    DATABASE_USER = get_env_variable("DATABASE_USER")
+    DATABASE_PASSWORD = get_env_variable("DATABASE_PASSWORD")
+    DATABASE_HOST = get_env_variable("DATABASE_HOST")
+    DATABASE_PORT = get_env_variable("DATABASE_PORT")
+    DATABASE_DB = get_env_variable("DATABASE_DB")
+
+    # The SQLAlchemy connection string.
+    SQLALCHEMY_DATABASE_URI = "%s://%s:%s@%s:%s/%s" % (
+        DATABASE_DIALECT,
+        DATABASE_USER,
+        DATABASE_PASSWORD,
+        DATABASE_HOST,
+        DATABASE_PORT,
+        DATABASE_DB,
+    )
+
+    REDIS_HOST = get_env_variable("REDIS_HOST")
+    REDIS_PORT = get_env_variable("REDIS_PORT")
+    REDIS_CELERY_DB = get_env_variable("REDIS_CELERY_DB", "0")
+    REDIS_RESULTS_DB = get_env_variable("REDIS_RESULTS_DB", "1")
+
+    RESULTS_BACKEND = FileSystemCache("/app/superset_home/sqllab")
+
+    CACHE_CONFIG = {
+        "CACHE_TYPE": "redis",
+        "CACHE_DEFAULT_TIMEOUT": 300,
+        "CACHE_KEY_PREFIX": "superset_",
+        "CACHE_REDIS_HOST": REDIS_HOST,
+        "CACHE_REDIS_PORT": REDIS_PORT,
+        "CACHE_REDIS_DB": REDIS_RESULTS_DB,
+    }
+    DATA_CACHE_CONFIG = CACHE_CONFIG
+
+
+    class CeleryConfig(object):
+        BROKER_URL = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_CELERY_DB}"
+        CELERY_IMPORTS = ("superset.sql_lab",)
+        CELERY_RESULT_BACKEND = f"redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_RESULTS_DB}"
+        CELERYD_LOG_LEVEL = "DEBUG"
+        CELERYD_PREFETCH_MULTIPLIER = 1
+        CELERY_ACKS_LATE = False
+        CELERYBEAT_SCHEDULE = {
+            "reports.scheduler": {
+                "task": "reports.scheduler",
+                "schedule": crontab(minute="*", hour="*"),
+            },
+            "reports.prune_log": {
+                "task": "reports.prune_log",
+                "schedule": crontab(minute=10, hour=0),
+            },
+        }
+
+
+    CELERY_CONFIG = CeleryConfig
+
+    FEATURE_FLAGS = {"ALERT_REPORTS": True}
+    ALERT_REPORTS_NOTIFICATION_DRY_RUN = True
+    WEBDRIVER_BASEURL = "http://superset:8088/"
+    # The base URL for the email report hyperlinks.
+    WEBDRIVER_BASEURL_USER_FRIENDLY = WEBDRIVER_BASEURL
+
+    SQLLAB_CTAS_NO_LIMIT = True
+
+    #
+    # Optionally import superset_config_docker.py (which will have been included on
+    # the PYTHONPATH) in order to allow for local settings to be overridden
+    #
+    try:
+        import superset_config_docker
+        from superset_config_docker import *  # noqa
+
+        logger.info(
+            f"Loaded your Docker configuration at " f"[{superset_config_docker.__file__}]"
+        )
+    except ImportError:
+        logger.info("Using default Docker config...")
+  docker-ci.sh: |
+    #!/usr/bin/env bash
+    #
+    # Licensed to the Apache Software Foundation (ASF) under one or more
+    # contributor license agreements.  See the NOTICE file distributed with
+    # this work for additional information regarding copyright ownership.
+    # The ASF licenses this file to You under the Apache License, Version 2.0
+    # (the "License"); you may not use this file except in compliance with
+    # the License.  You may obtain a copy of the License at
+    #
+    #    http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    #
+    /app/docker/docker-init.sh
+
+    # TODO: copy config overrides from ENV vars
+
+    # TODO: run celery in detached state
+    export SERVER_THREADS_AMOUNT=8
+    # start up the web server
+
+    /usr/bin/run-server.sh
+  docker-frontend.sh: |
+    #!/usr/bin/env bash
+    #
+    # Licensed to the Apache Software Foundation (ASF) under one or more
+    # contributor license agreements.  See the NOTICE file distributed with
+    # this work for additional information regarding copyright ownership.
+    # The ASF licenses this file to You under the Apache License, Version 2.0
+    # (the "License"); you may not use this file except in compliance with
+    # the License.  You may obtain a copy of the License at
+    #
+    #    http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    #
+    set -e
+
+    # Packages needed for puppeteer:
+    apt update
+    apt install -y chromium
+
+    cd /app/superset-frontend
+    npm install -f --no-optional --global webpack webpack-cli
+    npm install -f --no-optional
+
+    echo "Running frontend"
+    npm run dev
+  frontend-mem-nag.sh: |
+    #!/usr/bin/env bash
+    #
+    # Licensed to the Apache Software Foundation (ASF) under one or more
+    # contributor license agreements.  See the NOTICE file distributed with
+    # this work for additional information regarding copyright ownership.
+    # The ASF licenses this file to You under the Apache License, Version 2.0
+    # (the "License"); you may not use this file except in compliance with
+    # the License.  You may obtain a copy of the License at
+    #
+    #    http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing, software
+    # distributed under the License is distributed on an "AS IS" BASIS,
+    # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    # See the License for the specific language governing permissions and
+    # limitations under the License.
+    #
+
+    set -e
+
+    # We need at least 3GB of free mem...
+    MIN_MEM_FREE_GB=3
+    MIN_MEM_FREE_KB=$(($MIN_MEM_FREE_GB*1000000))
+
+    echo_mem_warn() {
+      MEM_FREE_KB=$(awk '/MemFree/ { printf "%s \n", $2 }' /proc/meminfo)
+      MEM_FREE_GB=$(awk '/MemFree/ { printf "%s \n", $2/1024/1024 }' /proc/meminfo)
+
+      if [[ "${MEM_FREE_KB}" -lt "${MIN_MEM_FREE_KB}" ]]; then
+        cat <<EOF
+        ===============================================
+        ========  Memory Insufficient Warning =========
+        ===============================================
+
+        It looks like you only have ${MEM_FREE_GB}GB of
+        memory free. Please increase your Docker
+        resources to at least ${MIN_MEM_FREE_GB}GB
+
+        ===============================================
+        ========  Memory Insufficient Warning =========
+        ===============================================
+    EOF
+      else
+        echo "Memory check Ok [${MEM_FREE_GB}GB free]"
+      fi
+    }
+
+    # Always nag if they're low on mem...
+    echo_mem_warn
+  run-server.sh: |
+    #!/usr/bin/env bash
+    #
+    # Licensed to the Apache Software Foundation (ASF) under one
+    # or more contributor license agreements.  See the NOTICE file
+    # distributed with this work for additional information
+    # regarding copyright ownership.  The ASF licenses this file
+    # to you under the Apache License, Version 2.0 (the
+    # "License"); you may not use this file except in compliance
+    # with the License.  You may obtain a copy of the License at
+    #
+    # http://www.apache.org/licenses/LICENSE-2.0
+    #
+    # Unless required by applicable law or agreed to in writing,
+    # software distributed under the License is distributed on an
+    # "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+    # KIND, either express or implied.  See the License for the
+    # specific language governing permissions and limitations
+    # under the License.
+    #
+    HYPHEN_SYMBOL='-'
+
+    gunicorn \
+        --bind "${SUPERSET_BIND_ADDRESS:-0.0.0.0}:${SUPERSET_PORT:-8088}" \
+        --access-logfile "${ACCESS_LOG_FILE:-$HYPHEN_SYMBOL}" \
+        --error-logfile "${ERROR_LOG_FILE:-$HYPHEN_SYMBOL}" \
+        --workers ${SERVER_WORKER_AMOUNT:-1} \
+        --worker-class ${SERVER_WORKER_CLASS:-gthread} \
+        --threads ${SERVER_THREADS_AMOUNT:-20} \
+        --timeout ${GUNICORN_TIMEOUT:-60} \
+        --keep-alive ${GUNICORN_KEEPALIVE:-2} \
+        --max-requests ${WORKER_MAX_REQUESTS:-0} \
+        --max-requests-jitter ${WORKER_MAX_REQUESTS_JITTER:-0} \
+        --limit-request-line ${SERVER_LIMIT_REQUEST_LINE:-0} \
+        --limit-request-field_size ${SERVER_LIMIT_REQUEST_FIELD_SIZE:-0} \
+        "${FLASK_APP}"
+kind: ConfigMap
+metadata:
+  name: config-superset

@@ -1,0 +1,32 @@
+apiVersion : apps/v1
+kind : Deployment
+metadata:
+  name: redis-superset
+  labels:
+    app : redis-superset
+    project : test
+spec:
+  selector:
+    matchLabels:
+      project : test
+  template:
+    metadata:
+      labels:
+        app : redis-superset
+        project: test
+    spec:
+      containers:
+        - name : redis-superset
+          resources: {}
+          image : aggrik/redis:latest
+          imagePullPolicy : IfNotPresent
+          volumeMounts:
+            - mountPath: /data #
+              name: redis-data
+
+      volumes:
+        - name: redis-data
+          emptyDir: {}
+#          hostPath:
+#           path: /storage/data/redis
+#           type: DirectoryOrCreate
