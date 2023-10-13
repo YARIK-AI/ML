@@ -225,6 +225,8 @@ spec:
           image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
           env:
+            - name: GIT_URL
+              value: http://gitbucket-int:8080/gitbucket
             - name: PYTHONWARNINGS
               value: ignore::DeprecationWarning,ignore::FutureWarning
             - name: AIRFLOW__CORE__DAGS_FOLDER
