@@ -1,0 +1,33 @@
+apiVersion : v1
+kind : Service
+metadata:
+  name: gitbucket-int
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : gitbucket  # Selecting PODS
+  ports:
+    - name      : gitbucket-internal
+      protocol  : TCP
+      targetPort: 8080  # Port on POD
+      port      : 8080
+---
+apiVersion : v1
+kind : Service
+metadata:
+  name: gitbucket-web
+  labels:
+    env: prod
+    owner: user
+spec:
+  selector:
+    app : gitbucket # Selecting PODS
+  ports:
+    - name      : gitbucket-web
+      protocol  : TCP
+      targetPort: 8080  # Port on POD
+      nodePort  : 32051  # Port on Load Balancer
+      port      : 3333
+  type: NodePort

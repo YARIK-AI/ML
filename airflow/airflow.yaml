@@ -66,6 +66,80 @@ data:
     AUTH_TYPE = AUTH_DB
 ---
 apiVersion: v1
+data:
+  install-packets.py: |+
+    from airflow import DAG
+    from datetime import datetime
+    import sys
+    import os
+    sys.path.insert(0,os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+    from airflow.operators.bash import BashOperator
+    from airflow.operators.empty import EmptyOperator
+    from airflow.operators.trigger_dagrun import TriggerDagRunOperator
+    from airflow.models import DagModel
+    import os
+    import time
+    from airflow import configuration as conf
+    from airflow.operators.python import PythonOperator
+
+    #------ параметры ------------
+    dagName           = 'install-packets'
+    strTags           = "install-packets"
+    #-----------------------------
+
+    bash_comm = '''
+    cd /tmp \
+    && aws s3 cp s3://install/install-packet.tar.gz install-packet.tar.gz --endpoint-url http://minio:9000/ \
+    && tar zxf install-packet.tar.gz \
+    && /bin/cp -rf ./install-packet/install-packet.py /root/airflow/dags/ \
+    && rm -rf /tmp/install-packet \
+    && rm -rf /tmp/install-packet.tar.gz \
+    && airflow dags reserialize \
+    && sleep 20
+    '''
+
+    def is_dag_exists(dag_id: str):
+        res = False
+        while res is False:
+            dag = DagModel.get_dagmodel(dag_id)
+            if dag is not None:
+                res = True
+            time.sleep(10)
+
+
+    CUR_DIR = os.path.abspath(os.path.dirname(__file__))
+    with DAG(dag_id=dagName,
+             schedule_interval=None,
+             is_paused_upon_creation=True,
+             start_date=datetime(2023,1,1,0,0),
+             catchup=False,
+             max_active_runs=1,
+             params={
+               'dagName':dagName
+               },
+             tags=[strTags]) as dag:
+        namespace = conf.get('kubernetes', 'NAMESPACE')
+        download_task = BashOperator(
+            task_id="download_task",
+            bash_command=bash_comm
+        )
+        wait_task = PythonOperator(task_id='wait_task', python_callable=is_dag_exists, op_args=['install-packet-dag'], dag=dag)
+        trigger_install = TriggerDagRunOperator(
+            task_id="trigger_install_dag",
+            trigger_dag_id="install-packet-dag",
+            wait_for_completion=True
+            )
+        complete = EmptyOperator(
+            task_id='All_jobs_completed',
+            dag=dag)
+
+    download_task >> wait_task >> trigger_install >> complete
+
+kind: ConfigMap
+metadata:
+  name: install-dags
+---
+apiVersion: v1
 automountServiceAccountToken: true
 kind: ServiceAccount
 metadata:
@@ -92,6 +166,7 @@ data:
   run.sh: |-
     #!/bin/bash
     mkdir -p $AIRFLOW__CORE__DAGS_FOLDER
+    cp /opt/install-dags/* $AIRFLOW__CORE__DAGS_FOLDER
     airflow standalone
 ---
 apiVersion: v1
@@ -143,10 +218,10 @@ spec:
           resources:
             requests:
               memory: "2Gi"
-              cpu: 1
+              cpu: 2
             limits:
               memory: "2Gi"
-              cpu: 1
+              cpu: 2
           image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
           env:
@@ -156,6 +231,8 @@ spec:
               value: /root/airflow/dags
             - name: IMAGE_NAME_PYSPARK
               value: aggrik/pyspark:latest
+            - name: IMAGE_NAME_KAFKA
+              value: aggrik/kafka:latest
             - name: AWS_ENDPOINT_URL
               value: http://minio:9000
             - name: AWS_ACCESS_KEY_ID
@@ -201,7 +278,13 @@ spec:
               mountPath: /root/airflow/webserver_config.py
               readOnly: false
               subPath: webserver_config.py
+            - name: configmap-airflow-install-dags
+              mountPath: /opt/install-dags              
       volumes:
+       - name: configmap-airflow-install-dags
+         configMap:
+           defaultMode: 0700
+           name: install-dags      
        - name: configmap-airflow-cfg
          configMap:
            defaultMode: 0700
