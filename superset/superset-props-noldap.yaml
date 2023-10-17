@@ -107,7 +107,8 @@ data:
     HTML_SANITIZATION = False
     FEATURE_FLAGS = {
       "ALERT_REPORTS": True,
-      "ENABLE_TEMPLATE_PROCESSING": True
+      "ENABLE_TEMPLATE_PROCESSING": True,
+      "GENERIC_CHART_AXES": True
     }
 
     LOG_FORMAT = "%(asctime)s:%(levelname)s:%(name)s:%(message)s"
