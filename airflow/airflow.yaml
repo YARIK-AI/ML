@@ -114,9 +114,6 @@ data:
             start_date=datetime(2023,1,1,0,0),
             catchup=False,
             max_active_runs=1,
-            params={
-              'dagName':dagName
-              },
             tags=[strTags]) as dag:
         namespace = conf.get('kubernetes', 'NAMESPACE')
         download_task = BashOperator(
