@@ -94,7 +94,7 @@ data:
     && /bin/cp -rf ./install-packet/install-packet.py /root/airflow/dags/ \
     && rm -rf /tmp/install-packet \
     && rm -rf /tmp/install-packet.tar.gz \
-    && airflow dags reserialize \
+    && airflow dags reserialize -S /root/airflow/dags/install-packet.py \
     && sleep 20
     '''
 
@@ -109,15 +109,15 @@ data:
 
     CUR_DIR = os.path.abspath(os.path.dirname(__file__))
     with DAG(dag_id=dagName,
-             schedule_interval=None,
-             is_paused_upon_creation=True,
-             start_date=datetime(2023,1,1,0,0),
-             catchup=False,
-             max_active_runs=1,
-             params={
-               'dagName':dagName
-               },
-             tags=[strTags]) as dag:
+            schedule_interval=None,
+            is_paused_upon_creation=True,
+            start_date=datetime(2023,1,1,0,0),
+            catchup=False,
+            max_active_runs=1,
+            params={
+              'dagName':dagName
+              },
+            tags=[strTags]) as dag:
         namespace = conf.get('kubernetes', 'NAMESPACE')
         download_task = BashOperator(
             task_id="download_task",
