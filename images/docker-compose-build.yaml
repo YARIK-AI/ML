@@ -1,0 +1,8 @@
+version: "2.1"  # optional since v1.27.0
+services:
+  cpp:
+    container_name: cpp
+    image: cpp:latest
+    hostname: cpp
+    build:
+      context: ./cpp
