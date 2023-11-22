@@ -58,6 +58,7 @@ mkdir .vscode
 "-I/usr/local/include/opencv4",
 "-I/usr/include/opencv4",
 "-lopencv_core", "-lopencv_videoio", "-lopencv_highgui", "-lopencv_imgcodecs",
+"-lOpenCL",
 ```
 
 Полный файл
