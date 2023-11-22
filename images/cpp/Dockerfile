@@ -20,4 +20,6 @@ RUN apt-get install -y qt6-base-dev
 
 RUN apt-get install -y libopencv-dev
 
+RUN apt-get install -y ocl-icd-opencl-dev opencl-clhpp-headers
+
 #USER sdl

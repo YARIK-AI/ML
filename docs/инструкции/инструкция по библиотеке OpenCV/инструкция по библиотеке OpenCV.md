@@ -1,4 +1,4 @@
-# Инструкция по библиотеке OpenCV
+# Инструкция по библиотеке OpenCV и OpenCL
 
 {черновой вариант, инструкция находится в разработке}
 
@@ -75,7 +75,9 @@ mkdir .vscode
                 "${file}",
                 "-I/usr/local/include/opencv4",
                 "-I/usr/include/opencv4",
+                "-I/usr/include",
                 "-lopencv_core", "-lopencv_videoio", "-lopencv_highgui", "-lopencv_imgcodecs",
+                "-lOpenCL",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
