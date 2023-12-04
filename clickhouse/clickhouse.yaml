@@ -211,4 +211,8 @@ spec:
            defaultMode: 0755
            name: config-clickhouse
        - name: clickhouse-data
-         emptyDir: {}
+         #emptyDir: {}
+         # Если надо хранить данные
+         hostPath:
+           path: /run/desktop/mnt/host/c/storage3/sdl/data/clickhouse-data-01
+           type: DirectoryOrCreate
