@@ -33,7 +33,7 @@ spec:
           envFrom:
           - configMapRef:
               name: superset-envs
-          image : aggrik/superset:2.1.0
+          image : aggrik/superset:4.0.2
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c", "/app/docker/docker-init.sh \
             && superset import_datasources -p /app/datasources/connects.yaml "]
