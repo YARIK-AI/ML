@@ -97,7 +97,7 @@ data:
         <path>/var/lib/clickhouse/</path>
         <tmp_path>/var/lib/clickhouse/tmp/</tmp_path>
         <user_files_path>/var/lib/clickhouse/user_files/</user_files_path>
-    <!--    <access_control_path>/var/lib/clickhouse/access/</access_control_path>-->
+        <access_control_path>/var/lib/clickhouse/access/</access_control_path>
         <users_config>users.xml</users_config>
         <default_profile>default</default_profile>
         <default_database>default</default_database>
@@ -147,6 +147,7 @@ data:
             <admin>
                 <password>admin</password>
                 <profile>default</profile>
+                <access_management>1</access_management>
                 <networks>
                     <ip>::/0</ip>
                 </networks>
