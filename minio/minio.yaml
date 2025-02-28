@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
         - name : minio
-          image : aggrik/minio:latest
+          image : 10.11.4.10:31500/minio:latest
+          #image : aggrik/minio:latest
           imagePullPolicy: IfNotPresent
           env:
           - name: MINIO_ACCESS_KEY

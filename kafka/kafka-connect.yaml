@@ -105,7 +105,8 @@ spec:
       containers:
         - name : kafka-connect
           resources: {}
-          image : aggrik/kafka:latest
+          image : 10.11.4.10:31500/kafka_multi:latest
+          #image : aggrik/kafka:latest
           env:
             - name: CLASSPATH
               value: /opt/jars

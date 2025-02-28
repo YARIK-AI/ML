@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
         - name : gitbucket
-          image : aggrik/gitbucket:latest
+          image : 10.11.4.10:31500/gitbucket:latest
+          #image : aggrik/gitbucket:latest
           args: ["--prefix=/gitbucket"]
           imagePullPolicy: IfNotPresent
           volumeMounts:

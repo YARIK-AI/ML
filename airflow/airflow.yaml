@@ -162,8 +162,15 @@ metadata:
 data:
   run.sh: |-
     #!/bin/bash
+    airflow db init
     mkdir -p $AIRFLOW__CORE__DAGS_FOLDER
     cp /opt/install-dags/* $AIRFLOW__CORE__DAGS_FOLDER
+    mkdir -p $AIRFLOW__CORE__PLUGINS_FOLDER
+    mkdir -p $AIRFLOW__CORE__LOGS_FOLDER
+    mkdir -p $AIRFLOW__CORE__PROCESSOR_FOLDER
+    mkdir -p $AIRFLOW__CORE__SCHEDULER_FOLDER
+    airflow users delete -u admin
+    airflow users create --username admin --firstname admin --lastname adminovich --role Admin --email admin@lllal.org --password admin
     airflow standalone
 ---
 apiVersion: v1
@@ -174,8 +181,6 @@ data:
   init.sh: |-
     #!/bin/bash
     airflow db init
-    airflow users delete -u admin
-    airflow users create --username admin --firstname admin --lastname adminovich --role Admin --email admin@lllal.org --password admin
 ---
 apiVersion : apps/v1
 kind : Deployment
@@ -198,16 +203,16 @@ spec:
       initContainers:
         - name : init-airflow
           resources: {}
-          image : aggrik/airflow:latest
+          image : 10.11.4.10:31500/airflow:latest
           imagePullPolicy: IfNotPresent
-          command: ["bash", "-c", "/opt/init.sh"]
+          command: ["bash", "-c", "/home/airflow/airflow/init.sh"]
           volumeMounts:
             - name: configmap-airflow-init
-              mountPath: /opt/init.sh
+              mountPath: /home/airflow/airflow/init.sh
               readOnly: true
               subPath: init.sh  
             - name: configmap-airflow-cfg
-              mountPath: /root/airflow/airflow.cfg
+              mountPath: /home/airflow/airflow/airflow.cfg
               readOnly: false
               subPath: airflow.cfg
       containers:
@@ -219,7 +224,7 @@ spec:
             limits:
               memory: "2Gi"
               cpu: 2
-          image : aggrik/airflow:latest
+          image : 10.11.4.10:31500/airflow:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: GIT_URL
@@ -227,11 +232,19 @@ spec:
             - name: PYTHONWARNINGS
               value: ignore::DeprecationWarning,ignore::FutureWarning
             - name: AIRFLOW__CORE__DAGS_FOLDER
-              value: /root/airflow/dags
+              value: /home/airflow/dags
+            - name: AIRFLOW__CORE__PLUGINS_FOLDER
+              value: /home/airflow/plugins
+            - name: AIRFLOW__CORE__LOGS_FOLDER
+              value: /home/airflow/logs
+            - name: AIRFLOW__CORE__PROCESSOR_FOLDER
+              value: /home/airflow/logs/dag_processor_manager/
+            - name: AIRFLOW__CORE__SCHEDULER_FOLDER
+              value: /home/airflow/logs/scheduler
             - name: IMAGE_NAME_PYSPARK
-              value: aggrik/pyspark:latest
+              value: 10.11.4.10:31500/pyspark:latest
             - name: IMAGE_NAME_KAFKA
-              value: aggrik/kafka:latest
+              value: 10.11.4.10:31500/kafka_multi:latest
             - name: AWS_ENDPOINT_URL
               value: http://minio:9000
             - name: AWS_ACCESS_KEY_ID
@@ -260,15 +273,12 @@ spec:
               value: "8123"
             - name: CLICKHOUSE_DATABASE
               value: sdl
-          command:
-          - bash
-          - -c
-          - /bin/run.sh
+          command : ["bash", "-c", "/bin/run.sh"]
           volumeMounts:
             - name: configmap-airflow-run
               mountPath: /bin/run.sh
               readOnly: true
-              subPath: run.sh    
+              subPath: run.sh               
             - name: configmap-airflow-cfg
               mountPath: /root/airflow/airflow.cfg
               readOnly: false
@@ -282,21 +292,21 @@ spec:
       volumes:
        - name: configmap-airflow-install-dags
          configMap:
-           defaultMode: 0700
+           defaultMode: 0775
            name: install-dags      
        - name: configmap-airflow-cfg
          configMap:
-           defaultMode: 0700
+           defaultMode: 0774
            name: airflowcfg
        - name: configmap-airflow-webserver-cfg
          configMap:
-           defaultMode: 0700
+           defaultMode: 0774
            name: airflow-webconf
        - name: configmap-airflow-run
          configMap:
-           defaultMode: 0700
-           name: airflow-run   
+           defaultMode: 0755
+           name: airflow-run              
        - name: configmap-airflow-init
          configMap:
-           defaultMode: 0700
+           defaultMode: 0755
            name: airflow-init 

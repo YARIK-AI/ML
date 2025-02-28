@@ -18,7 +18,8 @@ spec:
       containers:
         - name : redis-superset
           resources: {}
-          image : aggrik/redis:latest
+          image : 10.11.4.10:31500/redis:latest
+          #image : aggrik/redis:latest
           imagePullPolicy : IfNotPresent
           volumeMounts:
             - mountPath: /data #

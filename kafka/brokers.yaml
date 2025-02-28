@@ -383,7 +383,8 @@ spec:
           env:
             - name: KAFKA_OPTS
               value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
-          image: aggrik/kafka:latest
+          image : 10.11.4.10:31500/kafka_multi:latest
+          #image: aggrik/kafka:latest
           imagePullPolicy: IfNotPresent
           resources: {}
           volumeMounts:
@@ -453,7 +454,8 @@ spec:
           env:
             - name: KAFKA_OPTS
               value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
-          image: aggrik/kafka:latest
+          image : 10.11.4.10:31500/kafka_multi:latest
+          #image: aggrik/kafka:latest
           imagePullPolicy: IfNotPresent
           resources: {}
           volumeMounts:
@@ -523,7 +525,8 @@ spec:
           env:
             - name: KAFKA_OPTS
               value: -javaagent:/opt/kafka/prometheus/jmx_prometheus_javaagent.jar=7071:/opt/kafka/prometheus/kafka-2_0_0.yml
-          image: aggrik/kafka:latest
+          image : 10.11.4.10:31500/kafka_multi:latest
+          #image: aggrik/kafka:latest
           imagePullPolicy: IfNotPresent
           resources: {}
           volumeMounts:

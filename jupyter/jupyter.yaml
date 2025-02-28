@@ -24,7 +24,8 @@ spec:
             limits:
               memory: "2Gi"
               cpu: 2
-          image : aggrik/pyspark:latest
+          image: 10.11.4.10:31500/pyspark:latest
+          #image : aggrik/pyspark:latest
           imagePullPolicy: IfNotPresent
           env:
           - name: AWS_ACCESS_KEY_ID
