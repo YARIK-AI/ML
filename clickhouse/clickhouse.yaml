@@ -139,7 +139,9 @@ data:
                 <load_balancing>in_order</load_balancing>
                 <max_partitions_per_insert_block>5000</max_partitions_per_insert_block>
                 <log_queries>1</log_queries>
-                <enable_http_compression>1</enable_http_compression>
+                <enable_http_compression>0</enable_http_compression>
+                <date_time_input_format>best_effort</date_time_input_format>
+                <date_time_output_format>iso</date_time_output_format>
             </default>
         </profiles>
 

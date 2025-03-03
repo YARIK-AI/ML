@@ -1,3 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mlflow-run
+  labels:
+    app : mlflow
+    project : test
+data:
+  run.sh: |-
+    #!/bin/bash
+    mkdir -p /home/sdl/log
+    touch /home/sdl/log/gunicorn_error.log
+    mlflow  server  --backend-store-uri postgresql://mlflow_user:mlflow@postgres-mlflow/mlflow_db --default-artifact-root s3://mlflow/  --artifacts-destination s3://mlflow/ --host 0.0.0.0  --app-name basic-auth --serve-artifacts --static-prefix=/mlflow  --gunicorn-opts "--log-level debug --error-logfile /home/sdl/log/gunicorn_error.log" 
+---
 apiVersion : apps/v1
 kind : Deployment
 metadata:
@@ -26,13 +40,19 @@ spec:
               memory: "1Gi"
               cpu: 1          
           imagePullPolicy: IfNotPresent
-          command:
-          - /bin/bash
-          - -c
-          - 'mlflow  server  --backend-store-uri postgresql://mlflow_user:mlflow@postgres-mlflow/mlflow_db
-            --default-artifact-root s3://mlflow/  --artifacts-destination s3://mlflow/
-            --host 0.0.0.0  --app-name basic-auth --serve-artifacts  --gunicorn-opts
-            "--log-level debug --error-logfile /var/log/gunicorn_error.log" '
+          command: ["/bin/bash", "-c", "/home/sdl/run.sh"]
+          #command:
+          #- /bin/bash
+          #- -c
+          #- 'mlflow  server  --backend-store-uri postgresql://mlflow_user:mlflow@postgres-mlflow/mlflow_db
+          #  --default-artifact-root s3://mlflow/  --artifacts-destination s3://mlflow/
+          #  --host 0.0.0.0  --app-name basic-auth --serve-artifacts  --gunicorn-opts
+          #  "--log-level debug --error-logfile /home/sdl/log/gunicorn_error.log" '
+          volumeMounts:
+            - name: configmap-mlflow-run
+              mountPath: /home/sdl/run.sh
+              readOnly: true
+              subPath: run.sh
           env:
           - name: AWS_ACCESS_KEY_ID
             value: "adminminio"
@@ -40,4 +60,8 @@ spec:
             value: "adminminio"
           - name: MLFLOW_S3_ENDPOINT_URL
             value: "http://minio:9000"
-
+      volumes:
+        - name: configmap-mlflow-run
+          configMap:
+            defaultMode: 0755
+            name: mlflow-run

@@ -49,7 +49,7 @@ spec:
         - name : postgres-mlflow
           resources: {}
           image : aggrik/postgresql:latest
-          command: #["bash","-c", "tail -f"]
+          command:
           - /opt/run/run.sh    
           volumeMounts:
             - mountPath: /var/lib/postgresql
@@ -62,7 +62,7 @@ spec:
         - name: init-postgres-mlflow
           image : aggrik/postgresql:latest
           imagePullPolicy: IfNotPresent
-          command: #
+          command:
           - /opt/run/init.sh    
           volumeMounts:
             - mountPath: /var/lib/postgresql

@@ -76,7 +76,7 @@ spec:
       initContainers:
         - name : greenplum-init
           resources: {}
-          image : aggrik/greenplum_stable:latest
+          image: aggrik/greenplum_stable:latest
           imagePullPolicy: IfNotPresent
           env:
           - name: PXF_JVM_OPTS
