@@ -105,13 +105,12 @@ spec:
       containers:
         - name : kafka-connect
           resources: {}
-          image : 10.11.4.10:31500/kafka_multi:latest
-          #image : aggrik/kafka:latest
+          image : aggrik/kafka_multi:latest
           env:
             - name: CLASSPATH
               value: /opt/jars
           imagePullPolicy : IfNotPresent
-          command: #["bash", "-c", "tail -f "]
+          command:
             - /opt/kafka/props/run.sh
           volumeMounts:
             - name: configmap-kafka-connect-volume

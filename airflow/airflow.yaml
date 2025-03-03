@@ -203,7 +203,7 @@ spec:
       initContainers:
         - name : init-airflow
           resources: {}
-          image : 10.11.4.10:31500/airflow:latest
+          image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c", "/home/airflow/airflow/init.sh"]
           volumeMounts:
@@ -224,7 +224,7 @@ spec:
             limits:
               memory: "2Gi"
               cpu: 2
-          image : 10.11.4.10:31500/airflow:latest
+          image : aggrik/airflow:latest
           imagePullPolicy: IfNotPresent
           env:
             - name: GIT_URL
@@ -242,9 +242,9 @@ spec:
             - name: AIRFLOW__CORE__SCHEDULER_FOLDER
               value: /home/airflow/logs/scheduler
             - name: IMAGE_NAME_PYSPARK
-              value: 10.11.4.10:31500/pyspark:latest
+              value: aggrik/pyspark:latest
             - name: IMAGE_NAME_KAFKA
-              value: 10.11.4.10:31500/kafka_multi:latest
+              value: aggrik/kafka_multi:latest
             - name: AWS_ENDPOINT_URL
               value: http://minio:9000
             - name: AWS_ACCESS_KEY_ID

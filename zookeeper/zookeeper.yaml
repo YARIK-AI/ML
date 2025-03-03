@@ -30,7 +30,7 @@ spec:
       containers:
         - name : zoo-1
           resources: {}
-          image : 10.11.4.10:31500/zookeeper_multi:latest
+          image : aggrik/zookeeper_multi:latest
           imagePullPolicy : IfNotPresent
           command: ["bash", "-c", "/bin/run.sh 1"]
           volumeMounts:
@@ -73,7 +73,7 @@ spec:
       containers:
         - name : zoo-2
           resources: {}
-          image : 10.11.4.10:31500/zookeeper_multi:latest
+          image : aggrik/zookeeper_multi:latest
           imagePullPolicy : IfNotPresent
           command: ["bash", "-c", "/bin/run.sh 2"]
           volumeMounts:
@@ -116,7 +116,7 @@ spec:
       containers:
         - name : zoo-3
           resources: {}
-          image : 10.11.4.10:31500/zookeeper_multi:latest
+          image : aggrik/zookeeper_multi:latest
           imagePullPolicy : IfNotPresent
           command: ["bash", "-c", "/bin/run.sh 3"]
           volumeMounts:

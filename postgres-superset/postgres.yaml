@@ -48,8 +48,7 @@ spec:
       containers:
         - name : postgres-superset
           resources: {}
-          image : 10.11.4.10:31500/postgresql:latest
-          #image : aggrik/postgresql:latest
+          image : aggrik/postgresql:latest
           imagePullPolicy: IfNotPresent
           command:
           - /opt/run/run.sh    
@@ -61,8 +60,7 @@ spec:
               readOnly: true
       initContainers:
         - name: init-postgres-superset
-          image : 10.11.4.10:31500/postgresql:latest
-          #image : aggrik/postgresql:latest
+          image : aggrik/postgresql:latest
           imagePullPolicy: IfNotPresent
           command:
           - /opt/run/init.sh    

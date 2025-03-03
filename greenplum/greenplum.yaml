@@ -76,8 +76,7 @@ spec:
       initContainers:
         - name : greenplum-init
           resources: {}
-          image: 10.11.4.10:31500/greenplum_stable:latest
-          #image : aggrik/greenplum_stable:latest
+          image: aggrik/greenplum_stable:latest
           imagePullPolicy: IfNotPresent
           env:
           - name: PXF_JVM_OPTS
@@ -103,8 +102,7 @@ spec:
               subPath: hostlist_singlenode            
       containers:
         - name : greenplum
-          image : 10.11.4.10:31500/greenplum_stable:latest 
-          #image : aggrik/greenplum_stable:latest
+          image : aggrik/greenplum_stable:latest
           resources:
             requests:
               memory: "1024Mi"

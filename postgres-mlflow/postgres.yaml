@@ -48,9 +48,8 @@ spec:
       containers:
         - name : postgres-mlflow
           resources: {}
-          image : 10.11.4.10:31500/postgresql:latest
-          #image : aggrik/postgresql:latest
-          command: #["bash","-c", "tail -f"]
+          image : aggrik/postgresql:latest
+          command:
           - /opt/run/run.sh    
           volumeMounts:
             - mountPath: /var/lib/postgresql
@@ -61,10 +60,9 @@ spec:
               readOnly: true
       initContainers:
         - name: init-postgres-mlflow
-          image : 10.11.4.10:31500/postgresql:latest
-          #image : aggrik/postgresql:latest
+          image : aggrik/postgresql:latest
           imagePullPolicy: IfNotPresent
-          command: #
+          command:
           - /opt/run/init.sh    
           volumeMounts:
             - mountPath: /var/lib/postgresql

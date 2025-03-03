@@ -194,8 +194,7 @@ spec:
     spec:
       containers:
         - name : clickhouse
-          image : 10.11.4.10:31500/clickhouse:latest
-          #image : aggrik/clickhouse:latest
+          image : aggrik/clickhouse:latest
           resources:
             requests:
               memory: "4Gi"

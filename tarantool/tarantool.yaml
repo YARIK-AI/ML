@@ -17,15 +17,9 @@ spec:
     spec:
       containers:
         - name : tarantool
-          image : 10.11.4.10:31500/tarantool:latest
-          #image : aggrik/tarantool:latest
+          image : aggrik/tarantool:latest
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c", "./build/src/tarantool /opt/run.lua"]
-          #command:
-          #- /bin/bash
-          #- -c
-          #args: 
-          #- tarantool /opt/run.lua
           volumeMounts:
             - name: configmap-tarantool-run
               mountPath: /opt/run.lua

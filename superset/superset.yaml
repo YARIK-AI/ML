@@ -33,8 +33,7 @@ spec:
           envFrom:
           - configMapRef:
               name: superset-envs
-          image : 10.11.4.10:31500/superset:latest
-          #image : aggrik/superset:4.0.2
+          image : aggrik/superset:latest
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c", "/app/docker/docker-init.sh \
             && superset import_datasources -p /app/datasources/connects.yaml "]
@@ -53,11 +52,9 @@ spec:
           envFrom:
           - configMapRef:
               name: superset-envs
-          image : 10.11.4.10:31500/superset:latest
-          #image : aggrik/superset:4.0.2
+          image : aggrik/superset:latest
           imagePullPolicy: IfNotPresent
           command: ["bash", "-c", "/app/docker/docker-bootstrap.sh app-gunicorn"]
-          #command: ["bash", "-c", "tail -f"]
           volumeMounts:
             - mountPath: /app/docker
               name: configmap-superset-config              

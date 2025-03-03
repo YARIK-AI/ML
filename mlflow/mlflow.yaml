@@ -31,8 +31,7 @@ spec:
     spec:
       containers:
         - name : mlflow
-          image : 10.11.4.10:31500/mlflow:latest
-          #image : aggrik/mlflow:latest
+          image : aggrik/mlflow:latest
           resources:
             requests:
               memory: "1Gi"
